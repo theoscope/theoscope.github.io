@@ -10,7 +10,11 @@ export const themeConfig: ThemeConfig = {
     // site description
     description: '这里半是荒芜，半是繁花。',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
+<<<<<<< HEAD
     i18nTitle: false, // true, false
+=======
+    i18nTitle: true, // true | false
+>>>>>>> upstream/master
     // author name
     author: 'Modus TheoScope',
     // site url
@@ -27,7 +31,11 @@ export const themeConfig: ThemeConfig = {
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   color: {
     // default theme mode
+<<<<<<< HEAD
     mode: 'auto', // light, dark, auto
+=======
+    mode: 'light', // light | dark | auto
+>>>>>>> upstream/master
     light: {
       // primary color
       // used for title, hover, etc
@@ -58,9 +66,10 @@ export const themeConfig: ThemeConfig = {
   // GLOBAL SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   global: {
     // default language
-    locale: 'zh', // de, en, es, fr, ja, ko, pl, pt, ru, zh, zh-tw
+    locale: 'zh', // de | en | es | fr | ja | ko | pl | pt | ru | zh | zh-tw
     // more languages
     // not fill in the locale code above again, can be an empty array []
+<<<<<<< HEAD
     moreLocales: [], // ['de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw']
     // font styles for post text
     fontStyle: 'sans', // sans, serif
@@ -70,15 +79,26 @@ export const themeConfig: ThemeConfig = {
     toc: true, // true, false
     // KaTeX math rendering
     katex: true, // true, false
+=======
+    moreLocales: ['en', 'es', 'ja', 'ru', 'zh-tw'], // ['de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw']
+    // post font style
+    fontStyle: 'sans', // sans | serif
+    // post date format
+    dateFormat: 'YYYY-MM-DD', // YYYY-MM-DD | MM-DD-YYYY | DD-MM-YYYY | MMM D YYYY | D MMM YYYY
+    // enable table of contents
+    toc: true, // true | false
+    // enable katex math rendering
+    katex: true, // true | false
+>>>>>>> upstream/master
     // reduce motion
-    reduceMotion: false, // true, false
+    reduceMotion: false, // true | false
   },
   // GLOBAL SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
 
   // COMMENT SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   comment: {
     // enable comment system
-    enabled: true, // true, false
+    enabled: true, // true | false
     // giscus
     // https://giscus.app/
     giscus: {
@@ -110,9 +130,13 @@ export const themeConfig: ThemeConfig = {
         // more emojis: https://waline.js.org/en/guide/features/emoji.html
       ],
       // gif search
-      search: false, // true, false
+      search: false, // true | false
       // image uploader
+<<<<<<< HEAD
       imageUploader: true, // true, false
+=======
+      imageUploader: false, // true | false
+>>>>>>> upstream/master
     },
   },
   // COMMENT SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
@@ -141,7 +165,7 @@ export const themeConfig: ThemeConfig = {
     googleAnalyticsID: '',
     // umami analytics
     // https://cloud.umami.is
-    umamiAnalyticsID: '520af332-bfb7-4e7c-9386-5f273ee3d697',
+    umamiAnalyticsID: 'dab0e4b9-9cbf-43c3-af60-b09d3b545c38',
     // follow verification
     // https://follow.is/
     follow: {
@@ -151,7 +175,7 @@ export const themeConfig: ThemeConfig = {
       userID: '',
     },
     // apiflash access key
-    // automatically generate website screenshots for open graph images
+    // generate website screenshots for open graph images
     // get your access key at: https://apiflash.com/
     apiflashKey: '',
   },
@@ -194,21 +218,24 @@ export const themeConfig: ThemeConfig = {
   // PRELOAD SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   preload: {
     // image hosting url
+<<<<<<< HEAD
     // optimize remote images in Markdown files to avoid cumulative layout shift
     imageHostURL: '',
+=======
+    // optimize remote images and generate low-quality placeholders
+    imageHostURL: 'image.radishzz.cc',
+>>>>>>> upstream/master
     // custom google analytics js
-    // for users who route analytics javascript to a customized domain
+    // for users who proxy tracking scripts to a custom domain
     // see https://gist.github.com/xiaopc/0602f06ca465d76bd9efd3dda9393738
     customGoogleAnalyticsJS: '',
     // custom umami analytics js
-    // for users who deploy umami on their own, or route analytics javascript to a customized domain
-    // see https://github.com/umami-software/umami/discussions/1026
-    customUmamiAnalyticsJS: 'https://js.radishzz.cc/jquery.min.js',
+    // for users who self-deploy umami or proxy tracking scripts to a custom domain
+    // see https://umami.is/docs/bypass-ad-blockers
+    customUmamiAnalyticsJS: 'https://views.radishzz.cc/script.js',
   },
   // PRELOAD SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
 }
-
-export default themeConfig
 
 export const base = themeConfig.site.base === '/' ? '' : themeConfig.site.base.replace(/\/$/, '')
 export const defaultLocale = themeConfig.global.locale
