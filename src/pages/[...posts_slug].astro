@@ -97,7 +97,6 @@ export async function getStaticPaths() {
 const { post, lang, supportedLangs } = Astro.props
 const slug = post.data.abbrlink || post.id
 const description = getPostDescription(post, 'meta')
-const password = post.data.password
 const { Content, headings, remarkPluginFrontmatter } = await render(post)
 ---
 
