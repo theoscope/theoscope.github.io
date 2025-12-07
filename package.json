@@ -24,7 +24,9 @@
     "astro": "^5.16.4",
     "astro-compress": "^2.3.8",
     "astro-og-canvas": "^0.7.2",
+    "bcryptjs": "^2.4.3",
     "canvaskit-wasm": "^0.40.0",
+    "crypto-js": "^4.2.0",
     "feed": "^5.1.0",
     "katex": "^0.16.25",
     "lite-youtube-embed": "^0.3.4",
@@ -41,12 +43,10 @@
     "sanitize-html": "^2.17.0",
     "sharp": "^0.34.5",
     "twikoo": "^1.6.44",
-    "bcryptjs": "^2.4.3",
-    "crypto-js": "^4.2.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.4.1",
+    "@antfu/eslint-config": "^6.4.2",
     "@astrojs/check": "^0.9.6",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^24.10.1",
