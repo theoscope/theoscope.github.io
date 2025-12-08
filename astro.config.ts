@@ -19,8 +19,6 @@ import { remarkContainerDirectives } from './src/plugins/remark-container-direct
 import { remarkLeafDirectives } from './src/plugins/remark-leaf-directives.mjs'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
-import cloudflare from '@astrojs/cloudflare';
-
 const { url: site } = themeConfig.site
 const { imageHostURL } = themeConfig.preload ?? {}
 const imageConfig = imageHostURL
@@ -125,5 +123,4 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare(),
 })
