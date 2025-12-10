@@ -34,9 +34,12 @@ importers:
       astro-og-canvas:
         specifier: ^0.7.2
         version: 0.7.2(astro@5.16.4(@types/node@24.10.2)(jiti@2.6.1)(lightningcss@1.29.3)(rollup@4.53.3)(terser@5.39.0)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))
+<<<<<<< HEAD
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
+=======
+>>>>>>> upstream/master
       canvaskit-wasm:
         specifier: ^0.40.0
         version: 0.40.0
@@ -6372,8 +6375,11 @@ snapshots:
   base64-js@1.5.1: {}
 
   baseline-browser-mapping@2.9.5: {}
+<<<<<<< HEAD
 
   bcryptjs@2.4.3: {}
+=======
+>>>>>>> upstream/master
 
   binary-extensions@2.3.0: {}
 
