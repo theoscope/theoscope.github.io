@@ -115,7 +115,6 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-<<<<<<< HEAD
 
   // For local development
   server: {
@@ -125,6 +124,3 @@ export default defineConfig({
   },
 
 })
-=======
-})
->>>>>>> upstream/master

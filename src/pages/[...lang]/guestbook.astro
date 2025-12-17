@@ -1,0 +1,30 @@
+---
+import Comment from '@/components/Comment/Index.astro'
+import { getCollection, render } from 'astro:content'
+import { allLocales } from '@/config'
+import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import Layout from '@/layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  return allLocales.map(lang => ({
+    params: { lang: getLangRouteParam(lang) },
+  }))
+}
+
+const currentLang = getLangFromLocale(Astro.currentLocale)
+// Get guestbook page content with different language
+const allGuestbookEntries = await getCollection('guestbook')
+const guestbookEntry = allGuestbookEntries.find(entry => entry.data.lang === currentLang)
+  ?? allGuestbookEntries.find(entry => entry.data.lang === '')
+const { Content } = guestbookEntry ? await render(guestbookEntry) : { Content: null }
+---
+
+<Layout>
+  <!-- Decorative Line -->
+  <div class="uno-decorative-line" />
+  <!-- Guestbook Page Content -->
+  <div class="heti">
+    {Content && <Content />}
+  </div>
+  <Comment/>
+</Layout>

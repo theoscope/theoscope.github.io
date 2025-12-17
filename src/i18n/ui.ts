@@ -100,6 +100,7 @@ export const ui: Record<Language, Translation> = {
     tags: '标签',
     about: '关于',
     toc: '目录',
+    guestbook: '留言',
   },
   'zh-tw': {
     title: '「廢墟與花園」',
