@@ -2,8 +2,13 @@
 import type { Language } from '@/i18n/config'
 import { getTagPath } from '@/i18n/path'
 
+interface Tag {
+  name: string
+  count: number
+}
+
 interface Props {
-  tags: string[]
+  tags: Tag[]
   currentTag?: string
   lang: Language
 }
@@ -11,27 +16,31 @@ interface Props {
 const { tags, currentTag = '', lang } = Astro.props
 ---
 
-<div class="no-heti flex flex-wrap gap-x-3 gap-y-3.2">
-  {tags.map(tag => (
-    <a
-      href={getTagPath(tag, lang)}
-      class:list={[
-        'relative inline-block border border-secondary/25 rounded-full px-3.2 py-0.7 ring-secondary/80',
-        'transition-[colors,box-shadow] ease-out hover:(border-secondary/80 c-primary font-medium ring-0.2)',
-        currentTag === tag
-          ? 'border-secondary/80 c-primary font-medium ring-0.2'
-          : 'ring-0',
-      ]}
-    >
-      <span class="absolute inset-0 flex items-center justify-center whitespace-nowrap transition-font-weight">
-        {tag}
-      </span>
-      <span
-        class="inline-block font-medium opacity-0"
-        aria-hidden="true"
+<div class="no-heti">
+  <div class="flex flex-wrap gap-x-3 gap-y-3.2">
+    {tags.map(tag => (
+      <a
+        href={getTagPath(tag.name, lang)}
+        class:list={[
+          'relative inline-flex items-center gap-2 rounded-full px-4 py-1.5 border border-secondary/25',
+          'transition-all duration-300 ease-out hover:(border-primary/50 bg-primary/5 ring-0.5 ring-primary/30)',
+          'hover:scale-105 hover:shadow-sm',
+          currentTag === tag.name
+            ? 'border-primary/50 bg-primary/5 ring-0.5 ring-primary/30 font-medium'
+            : '',
+        ]}
       >
-        {tag}
-      </span>
-    </a>
-  ))}
+        <span class="whitespace-nowrap">{tag.name}</span>
+        <span class="h-6 min-w-6 inline-flex items-center justify-center rounded-full bg-secondary/10 px-1.5 text-xs font-medium">
+          {tag.count}
+        </span>
+      </a>
+    ))}
+  </div>
+
+  {tags.length === 0 && (
+    <div class="py-12 text-center text-secondary/60">
+      No tags found
+    </div>
+  )}
 </div>

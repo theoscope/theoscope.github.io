@@ -1,0 +1,61 @@
+---
+import { allLocales, defaultLocale } from '@/config'
+import { serendipities } from '@/data/serendipity'
+import { getLangFromPath } from '@/i18n/lang'
+import { ui } from '@/i18n/ui'
+import Layout from '@/layouts/Layout.astro'
+
+const { lang = defaultLocale } = Astro.params
+const currentLang = lang as keyof typeof ui
+const currentUI = ui[currentLang] ?? ui[defaultLocale]
+
+// Sort serendipities by date in descending order
+const sortedSerendipities = [...serendipities].sort((a, b) => {
+  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+})
+
+export function getStaticPaths() {
+  return allLocales.map(locale => ({
+    params: { lang: locale === defaultLocale ? undefined : locale },
+  }))
+}
+---
+
+<Layout>
+  <!-- Decorative Line -->
+  <div class="uno-decorative-line" />
+
+  <!-- Page Title -->
+  <h1 class="mb-8 text-center text-4xl font-bold">{currentUI.serendipity || 'Serendipity'}</h1>
+
+  <!-- Serendipities List -->
+  <div class="space-y-6">
+    {sortedSerendipities.length > 0
+? (
+      sortedSerendipities.map(serendipity => (
+        <article class="border rounded-lg p-6 transition-all duration-300 hover:(border-primary/50 shadow-md)">
+          <div class="mb-4 flex flex-wrap items-start justify-between gap-4">
+            <h2 class="font-bold">{serendipity.title}</h2>
+            <span class="text-sm text-secondary/60">{serendipity.createdAt}</span>
+          </div>
+          <div class="prose prose-base max-w-none text-secondary">
+            {serendipity.content.split('\n').map(paragraph => (
+              paragraph.trim()
+? (
+                <p class="mb-4">{paragraph}</p>
+              )
+: (
+                <br />
+              )
+            ))}
+          </div>
+        </article>
+      ))
+    )
+: (
+      <div class="col-span-full py-12 text-center text-secondary/60">
+        暂无偶得内容
+      </div>
+    )}
+  </div>
+</Layout>

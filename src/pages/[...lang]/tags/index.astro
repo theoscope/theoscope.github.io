@@ -2,6 +2,7 @@
 import TagList from '@/components/TagList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { ui } from '@/i18n/ui'
 import Layout from '@/layouts/Layout.astro'
 import { getAllTags } from '@/utils/content'
 
@@ -12,15 +13,27 @@ export async function getStaticPaths() {
 }
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
 const allTags = await getAllTags(currentLang)
 ---
 
 <Layout>
   <!-- Decorative Line -->
   <div class="uno-decorative-line" />
+
+  <!-- Page Title -->
+  <h1 class="mb-8 text-center text-4xl font-bold">{currentUI.tags}</h1>
+
   <!-- Tag List -->
   <TagList
     tags={allTags}
     lang={currentLang}
   />
+
+  <!-- Tag Description -->
+  {allTags.length > 0 && (
+    <div class="mt-8 text-sm text-secondary/60">
+      <p>{currentUI.tags} ({allTags.length})</p>
+    </div>
+  )}
 </Layout>

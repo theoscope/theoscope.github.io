@@ -188,14 +188,14 @@ export const getPostsGroupByTags = memoize(_getPostsGroupByTags)
  * Get all tags sorted by post count
  *
  * @param lang The language code to filter by, defaults to site's default language
- * @returns Array of tags sorted by popularity (most posts first)
+ * @returns Array of objects with tag name and count, sorted by popularity (most posts first)
  */
 async function _getAllTags(lang?: Language) {
   const tagMap = await getPostsGroupByTags(lang)
   const tagsWithCount = Array.from(tagMap.entries())
 
   tagsWithCount.sort((a, b) => b[1].length - a[1].length)
-  return tagsWithCount.map(([tag]) => tag)
+  return tagsWithCount.map(([tag, posts]) => ({ name: tag, count: posts.length }))
 }
 
 export const getAllTags = memoize(_getAllTags)

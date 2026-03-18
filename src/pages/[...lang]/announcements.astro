@@ -1,0 +1,88 @@
+---
+import { allLocales } from '@/config'
+import { getAllAnnouncements } from '@/data/announcement'
+import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { ui } from '@/i18n/ui'
+import Layout from '@/layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  return allLocales.map(lang => ({
+    params: { lang: getLangRouteParam(lang) },
+  }))
+}
+
+const currentLang = getLangFromLocale(Astro.currentLocale)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
+const allAnnouncements = getAllAnnouncements()
+
+// 根据公告类型获取不同的样式
+function getTypeClass(type: string) {
+  switch (type) {
+    case 'info': return 'border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20'
+    case 'warning': return 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20'
+    case 'success': return 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
+    case 'error': return 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
+    case 'notice': return 'border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20'
+    case 'update': return 'border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20'
+    case 'event': return 'border-pink-200 bg-pink-50 dark:border-pink-800 dark:bg-pink-900/20'
+    case 'important': return 'border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20'
+    case 'casual': return 'border-cyan-200 bg-cyan-50 dark:border-cyan-800 dark:bg-cyan-900/20'
+    default: return ''
+  }
+}
+
+// 获取公告类型的显示名称
+function getTypeDisplayName(type: string) {
+  switch (type) {
+    case 'info': return '信息'
+    case 'warning': return '警告'
+    case 'success': return '成功'
+    case 'error': return '错误'
+    case 'notice': return '通知'
+    case 'update': return '更新'
+    case 'event': return '活动'
+    case 'important': return '重要'
+    case 'casual': return '休闲'
+    default: return type
+  }
+}
+---
+
+<Layout>
+  <!-- Decorative Line -->
+  <div class="uno-decorative-line" />
+
+  <!-- Page Title -->
+  <h1 class="mb-8 text-center text-4xl font-bold">{currentUI.announcements || 'Announcements'}</h1>
+
+  <!-- Announcements List -->
+  <div class="space-y-6">
+    {allAnnouncements.length > 0
+? (
+      allAnnouncements.map(announcement => (
+        <div class={`border rounded-lg p-6 ${getTypeClass(announcement.type)}`}>
+          <div class="mb-4 flex items-start justify-between">
+            <h2 class="font-bold">{announcement.title}</h2>
+            <span class="rounded-full bg-secondary/10 px-2 py-1 text-xs">
+              {getTypeDisplayName(announcement.type)}
+            </span>
+          </div>
+          <div class="mb-4 text-secondary">
+            {announcement.content}
+          </div>
+          <div class="flex items-center justify-between text-sm text-secondary/60">
+            <span>{announcement.createdAt}</span>
+            <span class={announcement.isActive ? 'text-green-500' : 'text-gray-500'}>
+              {announcement.isActive ? '活跃' : '已过期'}
+            </span>
+          </div>
+        </div>
+      ))
+    )
+: (
+      <div class="py-12 text-center text-secondary/60">
+        暂无公告
+      </div>
+    )}
+  </div>
+</Layout>

@@ -5,13 +5,14 @@ import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
 import Layout from '@/layouts/Layout.astro'
 import { getAllTags, getPostsByTag, getTagSupportedLangs } from '@/utils/content'
+import { ui } from '@/i18n/ui'
 
 export async function getStaticPaths() {
   const paths = await Promise.all(allLocales.map(async (lang) => {
     const langTags = await getAllTags(lang)
     return langTags.map(tag => ({
-      params: { lang: getLangRouteParam(lang), tag },
-      props: { tag },
+      params: { lang: getLangRouteParam(lang), tag: tag.name },
+      props: { tag: tag.name },
     }))
   }))
   return paths.flat()
@@ -23,6 +24,7 @@ interface Props {
 
 const { tag } = Astro.props
 const currentLang = getLangFromLocale(Astro.currentLocale)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
 const posts = await getPostsByTag(tag, currentLang)
 const allTags = await getAllTags(currentLang)
 const supportedLangs = await getTagSupportedLangs(tag)
@@ -31,6 +33,10 @@ const supportedLangs = await getTagSupportedLangs(tag)
 <Layout supportedLangs={supportedLangs}>
   <!-- Decorative Line -->
   <div class="uno-decorative-line" />
+  
+  <!-- Page Title -->
+  <h1 class="text-4 font-bold mb-8">{currentUI.tags}: {tag}</h1>
+  
   <!-- Tag List -->
   <TagList
     tags={allTags}
@@ -45,4 +51,11 @@ const supportedLangs = await getTagSupportedLangs(tag)
       lang={currentLang}
     />
   </div>
+  
+  <!-- No Posts Message -->
+  {posts.length === 0 && (
+    <div class="text-center py-12 text-secondary/60">
+      No posts found for this tag
+    </div>
+  )}
 </Layout>

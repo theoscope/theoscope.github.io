@@ -1,0 +1,107 @@
+---
+import { getActiveAnnouncements } from '@/data/announcement'
+
+const activeAnnouncements = getActiveAnnouncements()
+---
+
+{activeAnnouncements.map((announcement, index) => {
+  const modalId = `announcement-modal-${announcement.id}`
+  const buttonId = `confirm-button-${announcement.id}`
+
+  // 根据公告类型获取不同的样式
+  const getTypeClass = (type: string) => {
+    switch (type) {
+      case 'info': return 'border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20'
+      case 'warning': return 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20'
+      case 'success': return 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
+      case 'error': return 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
+      case 'notice': return 'border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20'
+      case 'update': return 'border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20'
+      case 'event': return 'border-pink-200 bg-pink-50 dark:border-pink-800 dark:bg-pink-900/20'
+      case 'important': return 'border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20'
+      case 'casual': return 'border-cyan-200 bg-cyan-50 dark:border-cyan-800 dark:bg-cyan-900/20'
+      default: return ''
+    }
+  }
+
+  const typeClass = getTypeClass(announcement.type)
+
+  return (
+    <div id={modalId} class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
+      <div class={`relative max-w-md w-full border rounded-lg bg-background p-6 shadow-xl ${typeClass}`}>
+        <!-- 标题 -->
+        <h3 class="mb-4 text-xl font-bold">{announcement.title}</h3>
+
+        <!-- 内容 -->
+        <div class="mb-6 text-secondary">
+          {announcement.content}
+        </div>
+
+        <!-- 确认按钮 -->
+        <div class="flex justify-end">
+          <button
+            id={buttonId}
+            data-version={announcement.version}
+            class="rounded-full bg-primary px-4 py-2 text-background font-medium transition-colors hover:bg-primary/80"
+          >
+            {announcement.confirmText}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+})}
+
+<script is:inline>
+  // 检查是否已经确认过公告
+  function checkAnnouncements() {
+    const storedVersions = localStorage.getItem('announcementVersions')
+    const versions = storedVersions ? JSON.parse(storedVersions) : {}
+
+    // 获取所有活跃公告（从DOM中提取）
+    const modals = document.querySelectorAll('[id^="announcement-modal-"]')
+    modals.forEach((modal) => {
+      const announcementId = modal.id.replace('announcement-modal-', '')
+      const button = document.getElementById(`confirm-button-${announcementId}`)
+      if (button) {
+        const version = Number.parseInt(button.dataset.version || '0')
+        if (version > 0 && (!versions[announcementId] || versions[announcementId] < version)) {
+          modal.classList.remove('hidden')
+          modal.classList.add('flex')
+        }
+      }
+    })
+  }
+
+  // 确认公告
+  function confirmAnnouncement(announcementId, version) {
+    const storedVersions = localStorage.getItem('announcementVersions')
+    const versions = storedVersions ? JSON.parse(storedVersions) : {}
+
+    versions[announcementId] = version
+    localStorage.setItem('announcementVersions', JSON.stringify(versions))
+
+    const modal = document.getElementById(`announcement-modal-${announcementId}`)
+    if (modal) {
+      modal.classList.add('hidden')
+      modal.classList.remove('flex')
+    }
+  }
+
+  // 页面加载时检查公告并绑定事件
+  window.addEventListener('DOMContentLoaded', () => {
+    checkAnnouncements()
+
+    // 绑定所有确认按钮点击事件
+    const confirmButtons = document.querySelectorAll('[id^="confirm-button-"]')
+    confirmButtons.forEach((button) => {
+      const announcementId = button.id.replace('confirm-button-', '')
+      // 从按钮的data属性中获取版本号
+      const version = Number.parseInt(button.dataset.version || '0')
+
+      if (version > 0) {
+        button.addEventListener('click', () => confirmAnnouncement(announcementId, version))
+      }
+    })
+  })
+</script>

@@ -1,0 +1,213 @@
+---
+import Comment from '@/components/Comment/Index.astro'
+import { allLocales, themeConfig } from '@/config'
+import { links } from '@/data/links'
+import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { ui } from '@/i18n/ui'
+import Layout from '@/layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  return allLocales.map(lang => ({
+    params: { lang: getLangRouteParam(lang) },
+  }))
+}
+
+const currentLang = getLangFromLocale(Astro.currentLocale)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
+---
+
+<Layout>
+  <!-- Decorative Line -->
+  <div class="uno-decorative-line" />
+
+  <!-- Page Title -->
+  <div class="mb-12 text-center">
+    <h1 class="mb-4 text-4xl font-bold">{currentUI.links || 'Links'}</h1>
+    <p class="mx-auto max-w-2xl text-secondary/70">{currentUI.linksDescription || '我的朋友们，一起在网络世界中探索与成长'}</p>
+  </div>
+
+  <!-- Links Grid -->
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 md:grid-cols-2">
+    {links.length > 0
+? (
+      links.map(link => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block border border-secondary/20 rounded-lg p-6 transition-all duration-300 hover:(transform border-primary/50 bg-background/80 shadow-lg -translate-y-1)"
+        >
+          <div class="mb-5 flex items-center gap-4">
+            <div class="h-14 w-14 flex-shrink-0 overflow-hidden border-2 border-secondary/20 rounded-full transition-all duration-300 group-hover:border-primary/50">
+              <img
+                src={link.avatar}
+                alt={link.name}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="truncate text-xl font-bold transition-colors duration-300 group-hover:text-primary">
+                {link.name}
+              </h3>
+              <p class="mt-1 truncate text-sm text-secondary/60">
+                {link.description}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-sm text-primary/80 font-medium transition-all duration-300 group-hover:gap-2">
+            <span>{currentUI.visitWebsite || '访问网站'}</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </div>
+        </a>
+      ))
+    )
+: (
+      <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+        <div class="mb-6 h-20 w-20 flex items-center justify-center rounded-full bg-secondary/10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link text-secondary/40"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        </div>
+        <h3 class="mb-2 text-xl font-medium">{currentUI.noLinks || '暂无友链'}</h3>
+        <p class="max-w-md text-secondary/60">{currentUI.noLinksDesc || '当有新的友链时，它们会出现在这里'}</p>
+      </div>
+    )}
+  </div>
+
+  <!-- Apply for Link Section -->
+  <div class="mt-20">
+    <script is:inline>
+  // 全局复制函数
+  function copySiteInfo(button) {
+    // 从页面上获取站点信息
+    let siteInfoSection = button.closest('.py-2').querySelector('.space-y-4')
+  if (siteInfoSection) {
+      let siteInfoRows = siteInfoSection.querySelectorAll('div')
+      let textToCopy = ''
+
+      siteInfoRows.forEach((row) => {
+        let label = row.querySelector('span:first-child').textContent.trim()
+        let value = row.querySelector('span:last-child').textContent.trim()
+        textToCopy += `${label}: ${value}\n`
+      })
+
+      // 获取多语言文本
+      let copiedText = button.getAttribute('data-copied') || '已复制'
+      let copyFailedText = button.getAttribute('data-copy-failed') || '复制失败'
+
+      // 复制到剪贴板
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        let originalText = button.textContent
+        button.textContent = copiedText
+        button.classList.add('bg-green-500/10', 'text-green-500')
+        setTimeout(() => {
+          button.textContent = originalText
+          button.classList.remove('bg-green-500/10', 'text-green-500')
+        }, 2000)
+      }).catch((err) => {
+        console.error(`${copyFailedText}:`, err)
+      })
+  }
+  }
+  </script>
+    <div class="rounded-xl bg-background/50 p-8 shadow-sm">
+      <div class="mb-8 flex items-center gap-3">
+        <div class="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart text-primary"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </div>
+        <h2 class="text-2xl font-bold">{currentUI.applyForLink || '申请友链'}</h2>
+      </div>
+      <p class="mb-10 text-secondary">{currentUI.linkApplicationDesc || '如果你也有一个持续更新的博客，欢迎互换友链'}</p>
+
+      <div class="space-y-8">
+        <!-- Application Standards -->
+        <div class="py-2">
+          <h3 class="mb-6 text-lg font-semibold">{currentUI.applicationStandards || '申请标准'}</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+              </div>
+              <span class="text-secondary">{currentUI.applicationStandard1 || '贵站有一定深度的原创内容输出（读书笔记、专业研究、技术钻研或深度思考类内容）'}</span>
+            </li>
+            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+              </div>
+              <span class="text-secondary">{currentUI.applicationStandard2 || '建站时间至少半年以上，且已有十篇以上的原创博文'}</span>
+            </li>
+            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+              </div>
+              <span class="text-secondary">{currentUI.applicationStandard3 || '非以商业化为主，广告、推广内容不过多干扰阅读'}</span>
+            </li>
+            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+              </div>
+              <span class="text-secondary">{currentUI.applicationStandard4 || '申请者具备一定的基本教育背景（最好完成高中或同等学力层次教育）'}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-secondary/20"></div>
+
+        <!-- Site Information -->
+        <div class="py-2">
+          <div class="mb-6 flex items-center justify-between">
+            <h3 class="text-lg font-semibold">{currentUI.siteInformation || '本站信息'}</h3>
+            <button
+              class="rounded-full bg-secondary/10 px-4 py-1.5 text-sm text-secondary font-medium transition-all duration-300 hover:bg-secondary/20"
+              onclick="copySiteInfo(this)"
+              data-copied={currentUI.copied || '已复制'}
+              data-copy-failed={currentUI.copyFailed || '复制失败'}
+            >
+              {currentUI.copyAll || '复制全部'}
+            </button>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between">
+              <span class="text-secondary/70">{currentUI.siteName || '站点名称'}</span>
+              <span class="text-secondary font-medium">{themeConfig.site.title}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-secondary/70">{currentUI.siteUrl || '站点地址'}</span>
+              <span class="text-secondary font-medium">{themeConfig.site.url}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-secondary/70">{currentUI.siteDescription || '站点描述'}</span>
+              <span class="text-secondary font-medium">{themeConfig.site.description}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-secondary/70">{currentUI.rss || 'RSS'}</span>
+              <span class="text-secondary font-medium">{themeConfig.site.url}/atom.xml</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="h-px bg-secondary/20"></div>
+
+      <!-- Email Application -->
+      <div class="mt-8 py-2">
+        <div class="mb-6 flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail text-primary"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          <h3 class="text-lg font-semibold">{currentUI.applyByEmail || '通过邮件申请'}</h3>
+        </div>
+        <p class="mb-6 text-secondary">{currentUI.applyByEmailDesc || '您也可以使用邮件来提交友链申请'}</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="mailto:lapiscafe@foxmail.com" class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+            lapiscafe@foxmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment Section -->
+    <div class="mt-12">
+      <Comment />
+    </div>
+  </div>
+</Layout>

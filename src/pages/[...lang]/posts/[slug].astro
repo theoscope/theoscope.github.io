@@ -125,7 +125,7 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
       {post.data.tags?.length > 0 && (
         <div class="mt-12.6 uno-decorative-line" />
         <TagList
-          tags={post.data.tags}
+          tags={post.data.tags.map(tag => ({ name: tag, count: 0 }))}
           lang={currentLang}
         />
       )}
