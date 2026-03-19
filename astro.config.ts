@@ -22,14 +22,14 @@ import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 const { url: site } = themeConfig.site
 const { imageHostURL } = themeConfig.preload ?? {}
 const imageConfig = imageHostURL
-  ? { 
-      image: { 
-        domains: [imageHostURL], 
-        remotePatterns: [{ 
+  ? {
+      image: {
+        domains: [imageHostURL],
+        remotePatterns: [{
           protocol: 'https',
-          hostname: imageHostURL
-        }] 
-      } 
+          hostname: imageHostURL,
+        }],
+      },
     }
   : {}
 
@@ -81,7 +81,6 @@ export default defineConfig({
       [rehypeMermaid, { strategy: 'pre-mermaid' }],
       rehypeSlug,
       rehypeHeadingAnchor,
-      rehypeImageProcessor,
       rehypeExternalLinks,
       rehypeCodeCopyButton,
     ],
