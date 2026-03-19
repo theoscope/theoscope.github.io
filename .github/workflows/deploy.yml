@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]   # 当推送到 master 时触发
+    branches: [master]
 
 jobs:
   build-and-deploy:
@@ -11,20 +11,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.0  # 或者你本地使用的 pnpm 版本，如 9、10
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20   # 或 20，与你本地一致
+          node-version: 18
+          cache: 'pnpm'  # 利用缓存加速
 
       - name: Install dependencies
-        run: pnpm install          # 或 yarn / pnpm
+        run: pnpm install  # 或 pnpm i --frozen-lockfile 如果你有 pnpm-lock.yaml
 
       - name: Build
-        run: npm run build   # 生成 dist 文件夹
+        run: pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist          # Astro 默认输出目录
-          publish_branch: gh-pages      # 推送到 gh-pages 分支
+          publish_dir: ./dist
+          publish_branch: gh-pages
