@@ -1,7 +1,6 @@
 ---
+import { getCollection, render } from 'astro:content'
 import { allLocales, defaultLocale } from '@/config'
-import { serendipities } from '@/data/serendipity'
-import { getLangFromPath } from '@/i18n/lang'
 import { ui } from '@/i18n/ui'
 import Layout from '@/layouts/Layout.astro'
 
@@ -9,10 +8,26 @@ const { lang = defaultLocale } = Astro.params
 const currentLang = lang as keyof typeof ui
 const currentUI = ui[currentLang] ?? ui[defaultLocale]
 
-// Sort serendipities by date in descending order
-const sortedSerendipities = [...serendipities].sort((a, b) => {
-  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+// Get serendipities from content collection
+const serendipities = await getCollection('serendipity', ({ data }) => {
+  return data.lang === currentLang || data.lang === ''
 })
+
+// Sort serendipities by date in descending order
+const sortedSerendipities = serendipities.sort((a, b) => {
+  return new Date(b.data.published).getTime() - new Date(a.data.published).getTime()
+})
+
+// Render markdown content
+const renderedSerendipities = await Promise.all(
+  sortedSerendipities.map(async (serendipity) => {
+    const { Content } = await render(serendipity)
+    return {
+      ...serendipity,
+      Content,
+    }
+  }),
+)
 
 export function getStaticPaths() {
   return allLocales.map(locale => ({
@@ -22,40 +37,118 @@ export function getStaticPaths() {
 ---
 
 <Layout>
-  <!-- Decorative Line -->
   <div class="uno-decorative-line" />
-
   <!-- Page Title -->
-  <h1 class="mb-8 text-center text-4xl font-bold">{currentUI.serendipity || 'Serendipity'}</h1>
+  <h1 class="mb-16 text-center text-4xl font-bold tracking-tight">{currentUI.serendipity || 'Serendipity'}</h1>
 
   <!-- Serendipities List -->
-  <div class="space-y-6">
-    {sortedSerendipities.length > 0
-? (
-      sortedSerendipities.map(serendipity => (
-        <article class="border rounded-lg p-6 transition-all duration-300 hover:(border-primary/50 shadow-md)">
-          <div class="mb-4 flex flex-wrap items-start justify-between gap-4">
-            <h2 class="font-bold">{serendipity.title}</h2>
-            <span class="text-sm text-secondary/60">{serendipity.createdAt}</span>
-          </div>
-          <div class="prose prose-base max-w-none text-secondary">
-            {serendipity.content.split('\n').map(paragraph => (
-              paragraph.trim()
-? (
-                <p class="mb-4">{paragraph}</p>
-              )
-: (
-                <br />
-              )
-            ))}
-          </div>
-        </article>
-      ))
-    )
-: (
-      <div class="col-span-full py-12 text-center text-secondary/60">
-        暂无偶得内容
-      </div>
-    )}
+  <div class="space-y-16">
+    {renderedSerendipities.length > 0
+      ? (
+        renderedSerendipities.map((serendipity, index) => (
+          <>
+            <article data-id={serendipity.id} class="group">
+              <div class="mb-4 flex flex-wrap items-start justify-between gap-4">
+                <h2 class="text-xl font-light tracking-wide">{serendipity.data.title}</h2>
+                <span class="text-xs text-secondary/40">{serendipity.data.published.toLocaleDateString('zh-CN')}</span>
+              </div>
+              <div class="heti">
+                <div id="post-content" class="overflow-hidden transition-all duration-500 ease-in-out" style="max-height: 90px;">
+                  <serendipity.Content />
+                </div>
+                <button
+                  class="mt-3 text-sm text-secondary/60 underline underline-offset-4 transition-all duration-300 hover:text-secondary hover:underline-offset-6"
+                  data-id={serendipity.id}
+                  style="display: none;"
+                >
+                  展开
+                </button>
+              </div>
+            </article>
+            {index < renderedSerendipities.length - 1 && (
+              <hr class="border-secondary/5" />
+            )}
+          </>
+        ))
+      )
+      : (
+        <div class="py-32 text-center text-sm text-secondary/30">
+          {currentUI.noSerendipity || '暂无偶得内容'}
+        </div>
+      )}
   </div>
+
+  <script>
+let openId = null
+const collapsedHeight = '90px'
+
+function checkContentHeight() {
+  document.querySelectorAll('#post-content').forEach((content) => {
+    const article = content.closest('article')
+    const button = article.querySelector('button')
+    const contentHeight = content.scrollHeight
+
+    // 如果内容高度小于等于收起高度，隐藏按钮
+    if (contentHeight <= Number.parseInt(collapsedHeight)) {
+      button.style.display = 'none'
+      content.style.maxHeight = 'none'
+    }
+    else {
+      button.style.display = 'block'
+      content.style.maxHeight = collapsedHeight
+    }
+  })
+}
+
+function setOpenId(id) {
+  // 如果点击的是当前展开的文章，则收起它
+  if (openId === id) {
+    const openContent = document.querySelector(`article[data-id="${id}"] #post-content`)
+    if (openContent) {
+      openContent.style.maxHeight = collapsedHeight
+    }
+    const btn = document.querySelector(`article[data-id="${id}"] button`)
+    if (btn) {
+      btn.textContent = '展开'
+    }
+    openId = null
+  }
+  else {
+    // 收起所有文章
+    document.querySelectorAll('#post-content').forEach((content) => {
+      content.style.maxHeight = collapsedHeight
+    })
+    document.querySelectorAll('button[data-id]').forEach((btn) => {
+      btn.textContent = '展开'
+    })
+
+    // 展开当前点击的文章
+    openId = id
+    const openContent = document.querySelector(`article[data-id="${id}"] #post-content`)
+    if (openContent) {
+      openContent.style.maxHeight = `${openContent.scrollHeight}px`
+    }
+    const btn = document.querySelector(`article[data-id="${id}"] button`)
+    if (btn) {
+      btn.textContent = '收起'
+    }
+  }
+}
+
+// 添加事件监听器
+document.addEventListener('DOMContentLoaded', () => {
+  // 检查内容高度，隐藏短内容的按钮
+  checkContentHeight()
+
+  document.querySelectorAll('button[data-id]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.id
+      setOpenId(id)
+    })
+  })
+
+  // 窗口大小变化时重新检查
+  window.addEventListener('resize', checkContentHeight)
+})
+</script>
 </Layout>

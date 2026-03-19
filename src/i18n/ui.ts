@@ -33,6 +33,7 @@ interface Translation {
   applicationStandard2: string
   applicationStandard3: string
   applicationStandard4: string
+  noSerendipity: string
 }
 
 export const ui: Record<Language, Translation> = {
@@ -69,6 +70,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'Die Seite besteht seit mindestens sechs Monaten und verfügt über mehr als zehn originelle Blog-Beiträge',
     applicationStandard3: 'Nicht primär kommerziell, ohne übermäßige Werbung oder Werbeinhalte, die das Lesen stören',
     applicationStandard4: 'Bewerber verfügen über eine gewisse Grundbildung (am besten Schulabschluss oder gleichwertige Bildung)',
+    noSerendipity: 'Noch keine Serendipitäten',
   },
   'en': {
     title: 'Retypeset',
@@ -103,6 +105,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'The site has been established for at least half a year and has more than ten original blog posts',
     applicationStandard3: 'Not primarily commercial, with no excessive advertising or promotional content that interferes with reading',
     applicationStandard4: 'Applicants have a certain basic educational background (preferably completed high school or equivalent education)',
+    noSerendipity: 'No serendipities yet',
   },
   'es': {
     title: 'Retipografía',
@@ -137,6 +140,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'El sitio ha existido durante al menos seis meses y tiene más de diez publicaciones de blog originales',
     applicationStandard3: 'No es principalmente comercial, sin publicidad excesiva o contenido promocional que interfiere con la lectura',
     applicationStandard4: 'El solicitante tiene cierto nivel educativo básico (preferiblemente haber completado la escuela secundaria o educación equivalente)',
+    noSerendipity: 'Todavía no hay serendipias',
   },
   'fr': {
     title: 'Retypographie',
@@ -171,6 +175,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'Le site existe depuis au moins six mois et dispose de plus de dix articles de blog originaux',
     applicationStandard3: 'Pas principalement commercial, sans publicité excessive ou contenu promotionnel qui interfere avec la lecture',
     applicationStandard4: 'Le demandeur a un certain niveau d\'éducation de base (de préférence un diplôme d\'enseignement secondaire ou équivalent)',
+    noSerendipity: 'Pas encore de sérendipités',
   },
   'ja': {
     title: '再組版',
@@ -205,6 +210,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'サイトの設立から少なくとも半年以上経過しており、10以上のオリジナルブログ記事があること',
     applicationStandard3: '主に商業目的ではなく、読み物を妨げる過度な広告や宣伝コンテンツがないこと',
     applicationStandard4: '申請者が一定の基本教育背景を持っていること（望ましくは高校卒業または同等の教育を修了していること）',
+    noSerendipity: 'まだセレンディピティがありません',
   },
   'ko': {
     title: '재조판',
@@ -239,6 +245,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: '사이트가 적어도 6개월 이상 존재했으며 10개 이상의 원작 블로그 게시물이 있습니다',
     applicationStandard3: '주로 상업적이지 않으며, 읽기를 방해하는 과도한 광고 또는 홍보 콘텐츠가 없습니다',
     applicationStandard4: '신청자는 일정한 기본 교육 배경을 가지고 있습니다 (바람직하게는 고등학교 졸업 또는 동등한 교육을 이수했습니다)',
+    noSerendipity: '아직 세렌디피티가 없습니다',
   },
   'pl': {
     title: 'Przeskład',
@@ -273,6 +280,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'Strona istnieje przynajmniej od pół roku i ma więcej niż dziesięć oryginalnych postów na blogu',
     applicationStandard3: 'Nie jest przede wszystkim komercyjna, bez nadmiernej reklamy lub treści promocyjnych, które zakłócają czytanie',
     applicationStandard4: 'Aplikant ma pewną podstawową edukację (preferowane ukończenie szkoły średniej lub edukacji równoważnej)',
+    noSerendipity: 'Jeszcze żadnych serendypii',
   },
   'pt': {
     title: 'Retipografia',
@@ -307,6 +315,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'O site existe há pelo menos meio ano e tem mais de dez posts de blog originais',
     applicationStandard3: 'Não é principalmente comercial, sem publicidade excessiva ou conteúdo promocional que interfere com a leitura',
     applicationStandard4: 'O solicitante tem certo background educacional básico (preferencialmente concluído o ensino médio ou educação equivalente)',
+    noSerendipity: 'Ainda sem serendipidades',
   },
   'ru': {
     title: 'Переверстка',
@@ -341,6 +350,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: 'Сайт существует не менее полугода и имеет более десяти оригинальных блог-постов',
     applicationStandard3: 'Не является преимущественно коммерческим, без избыточной рекламы или промо-контента, мешающего чтению',
     applicationStandard4: 'Заявитель имеет определенный базовый образовательный уровень (предferably закончил среднюю школу или эквивалентное образование)',
+    noSerendipity: 'Пока нет серендипити',
   },
   'zh': {
     title: '重新编排',
@@ -375,6 +385,7 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: '建站时间至少半年以上，且已有十篇以上的原创博文',
     applicationStandard3: '非以商业化为主，广告、推广内容不过多干扰阅读',
     applicationStandard4: '申请者具备一定的基本教育背景（最好完成高中或同等学力层次教育）',
+    noSerendipity: '暂无偶得内容',
   },
   'zh-tw': {
     title: '重新編排',
@@ -409,5 +420,6 @@ export const ui: Record<Language, Translation> = {
     applicationStandard2: '建站時間至少半年以上，且已有十篇以上的原創博文',
     applicationStandard3: '非以商業化為主，廣告、推廣內容不過多干擾閱讀',
     applicationStandard4: '申請者具備一定的基本教育背景（最好完成高中或同等學力層次教育）',
+    noSerendipity: '暫無偶得內容',
   },
 }

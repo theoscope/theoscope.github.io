@@ -48,7 +48,7 @@ const nextUrl = supportedLangs.length > 0
 
   <!-- Theme Toggle -->
   <button
-    id="theme-toggle-button"
+    id="theme-toggle"
     class="aspect-square w-4 c-secondary active:scale-90 hover:c-primary"
     data-light-mode={lightMode}
     data-dark-mode={darkMode}
@@ -69,7 +69,7 @@ function applyTheme(isDark: boolean) {
 
   // Update meta theme-color tag
   const metaThemeColor = document.head.querySelector('meta[name="theme-color"]')
-  const themeButton = document.getElementById('theme-toggle-button')
+  const themeButton = document.getElementById('theme-toggle')
   const lightMode = themeButton?.dataset.lightMode
   const darkMode = themeButton?.dataset.darkMode
 
@@ -93,7 +93,7 @@ function handleThemeToggle(e: MouseEvent) {
     return
   }
 
-  if (!e.target.closest('#theme-toggle-button')) {
+  if (!e.target.closest('#theme-toggle')) {
     return
   }
 
