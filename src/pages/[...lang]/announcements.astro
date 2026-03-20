@@ -13,76 +13,108 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const currentUI = ui[currentLang as keyof typeof ui] ?? {}
-const allAnnouncements = getAllAnnouncements()
+const allAnnouncements = getAllAnnouncements(currentLang)
 
-// 根据公告类型获取不同的样式
+// 根据公告类型获取极简样式
 function getTypeClass(type: string) {
   switch (type) {
-    case 'info': return 'border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20'
-    case 'warning': return 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20'
-    case 'success': return 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
-    case 'error': return 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
-    case 'notice': return 'border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20'
-    case 'update': return 'border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20'
-    case 'event': return 'border-pink-200 bg-pink-50 dark:border-pink-800 dark:bg-pink-900/20'
-    case 'important': return 'border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20'
-    case 'casual': return 'border-cyan-200 bg-cyan-50 dark:border-cyan-800 dark:bg-cyan-900/20'
-    default: return ''
+    case 'important': return 'border-b border-blue-300 dark:border-blue-700'
+    case 'warning': return 'border-b border-amber-300 dark:border-amber-700'
+    case 'error': return 'border-b border-red-300 dark:border-red-700'
+    case 'success': return 'border-b border-green-300 dark:border-green-700'
+    case 'update': return 'border-b border-purple-300 dark:border-purple-700'
+    case 'info': return 'border-b border-cyan-300 dark:border-cyan-700'
+    case 'notice': return 'border-b border-indigo-300 dark:border-indigo-700'
+    case 'event': return 'border-b border-pink-300 dark:border-pink-700'
+    case 'casual': return 'border-b border-gray-300 dark:border-gray-600'
+    default: return 'border-b border-border'
   }
 }
 
-// 获取公告类型的显示名称
+// 获取公告类型的显示名称（多语言）
 function getTypeDisplayName(type: string) {
   switch (type) {
-    case 'info': return '信息'
-    case 'warning': return '警告'
-    case 'success': return '成功'
-    case 'error': return '错误'
-    case 'notice': return '通知'
-    case 'update': return '更新'
-    case 'event': return '活动'
-    case 'important': return '重要'
-    case 'casual': return '休闲'
-    default: return type
+    case 'info': return currentUI.announcementTypeInfo || '信息'
+    case 'warning': return currentUI.announcementTypeWarning || '警告'
+    case 'success': return currentUI.announcementTypeSuccess || '成功'
+    case 'error': return currentUI.announcementTypeError || '错误'
+    case 'notice': return currentUI.announcementTypeNotice || '通知'
+    case 'update': return currentUI.announcementTypeUpdate || '更新'
+    case 'event': return currentUI.announcementTypeEvent || '活动'
+    case 'important': return currentUI.announcementTypeImportant || '重要'
+    case 'casual': return currentUI.announcementTypeCasual || '随意'
+    default: return '未知'
   }
 }
 ---
 
 <Layout>
-  <!-- Decorative Line -->
   <div class="uno-decorative-line" />
-
   <!-- Page Title -->
-  <h1 class="mb-8 text-center text-4xl font-bold">{currentUI.announcements || 'Announcements'}</h1>
+  <h1 class="mb-12 text-center text-4xl font-bold" style="opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.1s;">{currentUI.announcements || 'Announcements'}</h1>
 
   <!-- Announcements List -->
-  <div class="space-y-6">
+  <div class="space-y-8">
     {allAnnouncements.length > 0
 ? (
-      allAnnouncements.map(announcement => (
-        <div class={`border rounded-lg p-6 ${getTypeClass(announcement.type)}`}>
+      allAnnouncements.map((announcement, index) => (
+        <div
+          class={`py-6 ${getTypeClass(announcement.type)}`}
+          style={`opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: ${0.2 + index * 0.1}s;`}
+          data-active={announcement.isActive}
+        >
           <div class="mb-4 flex items-start justify-between">
-            <h2 class="font-bold">{announcement.title}</h2>
-            <span class="rounded-full bg-secondary/10 px-2 py-1 text-xs">
+            <h2 class="text-lg font-medium leading-tight">{announcement.title}</h2>
+            <span class={`rounded px-2 py-0.5 text-xs ${
+              announcement.type === 'important'
+? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
+              : announcement.type === 'warning'
+? 'bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400'
+              : announcement.type === 'error'
+? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400'
+              : announcement.type === 'success'
+? 'bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400'
+              : announcement.type === 'update'
+? 'bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
+              : announcement.type === 'info'
+? 'bg-cyan-50 text-cyan-600 dark:bg-cyan-900/20 dark:text-cyan-400'
+              : announcement.type === 'notice'
+? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400'
+              : announcement.type === 'event'
+? 'bg-pink-50 text-pink-600 dark:bg-pink-900/20 dark:text-pink-400'
+              : announcement.type === 'casual'
+? 'bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
+              : 'bg-gray-50 text-muted-foreground dark:bg-gray-800'
+            }`}
+            >
               {getTypeDisplayName(announcement.type)}
             </span>
           </div>
-          <div class="mb-4 text-secondary">
+          <div class="text-muted-foreground mb-5 leading-relaxed">
             {announcement.content}
           </div>
-          <div class="flex items-center justify-between text-sm text-secondary/60">
+          <div class="text-muted-foreground/70 flex items-center justify-between text-xs">
             <span>{announcement.createdAt}</span>
-            <span class={announcement.isActive ? 'text-green-500' : 'text-gray-500'}>
-              {announcement.isActive ? '活跃' : '已过期'}
+            <span class={`rounded px-2 py-0.5 text-xs font-medium ${
+              announcement.isActive ? 'text-green-600 dark:bg-green-900/20 dark:text-green-400 dark:border-green-700' : 'text-gray-500 dark:text-gray-400'
+            }`}
+            >
+              {announcement.isActive ? (currentUI.announcementStatusActive || '活跃') : (currentUI.announcementStatusExpired || '已过期')}
             </span>
           </div>
         </div>
       ))
     )
 : (
-      <div class="py-12 text-center text-secondary/60">
-        暂无公告
+      <div class="text-muted-foreground/60 py-20 text-center">
+        {currentUI.noAnnouncements || '暂无公告'}
       </div>
     )}
   </div>
 </Layout>
+
+<style>
+  [data-active="false"] {
+    opacity: 0.4 !important;
+  }
+</style>

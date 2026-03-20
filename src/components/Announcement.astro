@@ -1,26 +1,30 @@
 ---
 import { getActiveAnnouncements } from '@/data/announcement'
+import { getLangFromLocale } from '@/i18n/lang'
+import { ui } from '@/i18n/ui'
 
-const activeAnnouncements = getActiveAnnouncements()
+const currentLang = getLangFromLocale(Astro.currentLocale)
+const activeAnnouncements = getActiveAnnouncements(currentLang)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
 ---
 
 {activeAnnouncements.map((announcement, index) => {
   const modalId = `announcement-modal-${announcement.id}`
   const buttonId = `confirm-button-${announcement.id}`
 
-  // 根据公告类型获取不同的样式
+  // 根据公告类型获取极简样式
   const getTypeClass = (type: string) => {
     switch (type) {
-      case 'info': return 'border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20'
-      case 'warning': return 'border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-900/20'
-      case 'success': return 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
-      case 'error': return 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
-      case 'notice': return 'border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20'
-      case 'update': return 'border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20'
-      case 'event': return 'border-pink-200 bg-pink-50 dark:border-pink-800 dark:bg-pink-900/20'
-      case 'important': return 'border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20'
-      case 'casual': return 'border-cyan-200 bg-cyan-50 dark:border-cyan-800 dark:bg-cyan-900/20'
-      default: return ''
+      case 'important': return 'border-b border-blue-300 dark:border-blue-700'
+      case 'warning': return 'border-b border-amber-300 dark:border-amber-700'
+      case 'error': return 'border-b border-red-300 dark:border-red-700'
+      case 'success': return 'border-b border-green-300 dark:border-green-700'
+      case 'update': return 'border-b border-purple-300 dark:border-purple-700'
+      case 'info': return 'border-b border-cyan-300 dark:border-cyan-700'
+      case 'notice': return 'border-b border-indigo-300 dark:border-indigo-700'
+      case 'event': return 'border-b border-pink-300 dark:border-pink-700'
+      case 'casual': return 'border-b border-gray-300 dark:border-gray-600'
+      default: return 'border-b border-border'
     }
   }
 
@@ -28,12 +32,58 @@ const activeAnnouncements = getActiveAnnouncements()
 
   return (
     <div id={modalId} class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4">
-      <div class={`relative max-w-md w-full border rounded-lg bg-background p-6 shadow-xl ${typeClass}`}>
-        <!-- 标题 -->
-        <h3 class="mb-4 text-xl font-bold">{announcement.title}</h3>
+      <div class="border-border relative max-w-md w-full border rounded-xl bg-background p-8 shadow-lg" style="opacity: 0; transform: scale(0.95); animation: fadeInUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;">
+        <!-- 标题和类型标签 -->
+        <div class="mb-6 flex items-start justify-between">
+          <h3 class="text-xl font-medium leading-tight">{announcement.title}</h3>
+          <span class={`rounded-full px-3 py-1 text-xs font-medium ${
+            announcement.type === 'important'
+? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+            : announcement.type === 'warning'
+? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
+            : announcement.type === 'error'
+? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+            : announcement.type === 'success'
+? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+            : announcement.type === 'update'
+? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
+            : announcement.type === 'info'
+? 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400'
+            : announcement.type === 'notice'
+? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400'
+            : announcement.type === 'event'
+? 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400'
+            : announcement.type === 'casual'
+? 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'
+            : 'bg-gray-100 text-muted-foreground dark:bg-gray-800'
+          }`}
+          >
+            {
+              announcement.type === 'info'
+? (currentUI.announcementTypeInfo || '信息')
+              : announcement.type === 'warning'
+? (currentUI.announcementTypeWarning || '警告')
+              : announcement.type === 'success'
+? (currentUI.announcementTypeSuccess || '成功')
+              : announcement.type === 'error'
+? (currentUI.announcementTypeError || '错误')
+              : announcement.type === 'notice'
+? (currentUI.announcementTypeNotice || '通知')
+              : announcement.type === 'update'
+? (currentUI.announcementTypeUpdate || '更新')
+              : announcement.type === 'event'
+? (currentUI.announcementTypeEvent || '活动')
+              : announcement.type === 'important'
+? (currentUI.announcementTypeImportant || '重要')
+              : announcement.type === 'casual'
+? (currentUI.announcementTypeCasual || '休闲')
+              : announcement.type
+            }
+          </span>
+        </div>
 
         <!-- 内容 -->
-        <div class="mb-6 text-secondary">
+        <div class="text-muted-foreground mb-8 leading-relaxed">
           {announcement.content}
         </div>
 
@@ -42,7 +92,7 @@ const activeAnnouncements = getActiveAnnouncements()
           <button
             id={buttonId}
             data-version={announcement.version}
-            class="rounded-full bg-primary px-4 py-2 text-background font-medium transition-colors hover:bg-primary/80"
+            class="border-border hover:bg-muted border rounded-lg px-6 py-2.5 text-sm font-medium transition-colors"
           >
             {announcement.confirmText}
           </button>
@@ -60,14 +110,24 @@ const activeAnnouncements = getActiveAnnouncements()
 
     // 获取所有活跃公告（从DOM中提取）
     const modals = document.querySelectorAll('[id^="announcement-modal-"]')
+    let shownModal = false
+
     modals.forEach((modal) => {
       const announcementId = modal.id.replace('announcement-modal-', '')
       const button = document.getElementById(`confirm-button-${announcementId}`)
-      if (button) {
+      if (button && !shownModal) {
         const version = Number.parseInt(button.dataset.version || '0')
         if (version > 0 && (!versions[announcementId] || versions[announcementId] < version)) {
           modal.classList.remove('hidden')
           modal.classList.add('flex')
+          // 重置动画
+          const content = modal.querySelector('div.border')
+          if (content) {
+            content.style.animation = 'none'
+            void content.offsetWidth // 触发重排
+            content.style.animation = 'fadeInUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards'
+          }
+          shownModal = true // 只显示第一个未确认的公告
         }
       }
     })
@@ -86,6 +146,9 @@ const activeAnnouncements = getActiveAnnouncements()
       modal.classList.add('hidden')
       modal.classList.remove('flex')
     }
+
+    // 检查并显示下一个未确认的公告
+    checkAnnouncements()
   }
 
   // 页面加载时检查公告并绑定事件

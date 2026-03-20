@@ -9,6 +9,7 @@ export interface Announcement {
   type: AnnouncementType
   createdAt: string
   isActive: boolean
+  lang: string
 }
 
 export const announcements: Announcement[] = [
@@ -21,6 +22,7 @@ export const announcements: Announcement[] = [
     type: 'info',
     createdAt: '2024-01-01',
     isActive: false,
+    lang: 'zh',
   },
   {
     id: 'announcement-2',
@@ -31,6 +33,7 @@ export const announcements: Announcement[] = [
     type: 'warning',
     createdAt: '2024-01-02',
     isActive: false,
+    lang: 'zh',
   },
   {
     id: 'announcement-3',
@@ -41,6 +44,7 @@ export const announcements: Announcement[] = [
     type: 'success',
     createdAt: '2024-01-03',
     isActive: true,
+    lang: 'zh',
   },
   {
     id: 'announcement-4',
@@ -51,6 +55,7 @@ export const announcements: Announcement[] = [
     type: 'error',
     createdAt: '2024-01-04',
     isActive: true,
+    lang: 'zh',
   },
   {
     id: 'announcement-5',
@@ -61,6 +66,7 @@ export const announcements: Announcement[] = [
     type: 'notice',
     createdAt: '2024-01-01',
     isActive: false,
+    lang: 'zh',
   },
   {
     id: 'announcement-6',
@@ -71,6 +77,7 @@ export const announcements: Announcement[] = [
     type: 'update',
     createdAt: '2024-01-02',
     isActive: false,
+    lang: 'zh',
   },
   {
     id: 'announcement-7',
@@ -81,6 +88,7 @@ export const announcements: Announcement[] = [
     type: 'event',
     createdAt: '2024-01-03',
     isActive: true,
+    lang: 'zh',
   },
   {
     id: 'announcement-9',
@@ -91,6 +99,7 @@ export const announcements: Announcement[] = [
     type: 'important',
     createdAt: '2024-01-04',
     isActive: true,
+    lang: 'zh',
   },
   {
     id: 'announcement-10',
@@ -101,15 +110,20 @@ export const announcements: Announcement[] = [
     type: 'casual',
     createdAt: '2024-01-04',
     isActive: true,
+    lang: 'zh',
   },
 ]
 
-export function getActiveAnnouncements(): Announcement[] {
-  return announcements.filter(announcement => announcement.isActive)
+export function getActiveAnnouncements(lang: string = ''): Announcement[] {
+  return announcements.filter(announcement =>
+    announcement.isActive && (announcement.lang === lang || announcement.lang === ''),
+  )
 }
 
-export function getAllAnnouncements(): Announcement[] {
-  return [...announcements].sort((a, b) => {
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  })
+export function getAllAnnouncements(lang: string = ''): Announcement[] {
+  return announcements
+    .filter(announcement => announcement.lang === lang || announcement.lang === '')
+    .sort((a, b) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    })
 }

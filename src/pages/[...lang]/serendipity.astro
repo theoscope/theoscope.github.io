@@ -59,7 +59,6 @@ export function getStaticPaths() {
                 <button
                   class="mt-3 text-sm text-secondary/60 underline underline-offset-4 transition-all duration-300 hover:text-secondary hover:underline-offset-6"
                   data-id={serendipity.id}
-                  style="display: none;"
                 >
                   展开
                 </button>
@@ -141,20 +140,34 @@ function setOpenId(id: string) {
   }
 }
 
-// 添加事件监听器
-document.addEventListener('DOMContentLoaded', () => {
-  // 检查内容高度，隐藏短内容的按钮
-  checkContentHeight()
+function initSerendipity() {
+  // 等待内容完全渲染后再检查高度
+  setTimeout(() => {
+    checkContentHeight()
+  }, 100)
 
+  // 为所有展开按钮添加点击事件
+  document.querySelectorAll('button[data-id]').forEach((button) => {
+    // 移除可能存在的旧事件监听器
+    button.replaceWith(button.cloneNode(true))
+  })
+
+  // 重新添加事件监听器
   document.querySelectorAll('button[data-id]').forEach((button) => {
     button.addEventListener('click', () => {
-      const id = (button as HTMLElement).dataset.id
+      const id = (button as HTMLElement).dataset.id as string
       setOpenId(id as string)
     })
   })
+}
 
-  // 窗口大小变化时重新检查
-  window.addEventListener('resize', checkContentHeight)
-})
+// 监听 Astro 客户端导航事件
+document.addEventListener('astro:page-load', initSerendipity)
+
+// 初始加载时执行
+document.addEventListener('DOMContentLoaded', initSerendipity)
+
+// 窗口大小变化时重新检查
+window.addEventListener('resize', checkContentHeight)
 </script>
 </Layout>

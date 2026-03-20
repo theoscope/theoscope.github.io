@@ -34,6 +34,19 @@ interface Translation {
   applicationStandard3: string
   applicationStandard4: string
   noSerendipity: string
+  // 公告相关翻译
+  announcementTypeInfo: string
+  announcementTypeWarning: string
+  announcementTypeSuccess: string
+  announcementTypeError: string
+  announcementTypeNotice: string
+  announcementTypeUpdate: string
+  announcementTypeEvent: string
+  announcementTypeImportant: string
+  announcementTypeCasual: string
+  announcementStatusActive: string
+  announcementStatusExpired: string
+  noAnnouncements: string
 }
 
 export const ui: Record<Language, Translation> = {
@@ -71,6 +84,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Nicht primär kommerziell, ohne übermäßige Werbung oder Werbeinhalte, die das Lesen stören',
     applicationStandard4: 'Bewerber verfügen über eine gewisse Grundbildung (am besten Schulabschluss oder gleichwertige Bildung)',
     noSerendipity: 'Noch keine Serendipitäten',
+    // 公告相关翻译
+    announcementTypeInfo: 'Information',
+    announcementTypeWarning: 'Warnung',
+    announcementTypeSuccess: 'Erfolg',
+    announcementTypeError: 'Fehler',
+    announcementTypeNotice: 'Anmerkung',
+    announcementTypeUpdate: 'Aktualisierung',
+    announcementTypeEvent: 'Ereignis',
+    announcementTypeImportant: 'Wichtig',
+    announcementTypeCasual: 'Casual',
+    announcementStatusActive: 'Aktiv',
+    announcementStatusExpired: 'Abgelaufen',
+    noAnnouncements: 'Keine Ankündigungen',
   },
   'en': {
     title: 'Retypeset',
@@ -106,6 +132,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Not primarily commercial, with no excessive advertising or promotional content that interferes with reading',
     applicationStandard4: 'Applicants have a certain basic educational background (preferably completed high school or equivalent education)',
     noSerendipity: 'No serendipities yet',
+    // 公告相关翻译
+    announcementTypeInfo: 'Info',
+    announcementTypeWarning: 'Warning',
+    announcementTypeSuccess: 'Success',
+    announcementTypeError: 'Error',
+    announcementTypeNotice: 'Notice',
+    announcementTypeUpdate: 'Update',
+    announcementTypeEvent: 'Event',
+    announcementTypeImportant: 'Important',
+    announcementTypeCasual: 'Casual',
+    announcementStatusActive: 'Active',
+    announcementStatusExpired: 'Expired',
+    noAnnouncements: 'No announcements',
   },
   'es': {
     title: 'Retipografía',
@@ -141,6 +180,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'No es principalmente comercial, sin publicidad excesiva o contenido promocional que interfiere con la lectura',
     applicationStandard4: 'El solicitante tiene cierto nivel educativo básico (preferiblemente haber completado la escuela secundaria o educación equivalente)',
     noSerendipity: 'Todavía no hay serendipias',
+    // 公告相关翻译
+    announcementTypeInfo: 'Información',
+    announcementTypeWarning: 'Advertencia',
+    announcementTypeSuccess: 'Éxito',
+    announcementTypeError: 'Error',
+    announcementTypeNotice: 'Noticia',
+    announcementTypeUpdate: 'Actualización',
+    announcementTypeEvent: 'Evento',
+    announcementTypeImportant: 'Importante',
+    announcementTypeCasual: 'Casual',
+    announcementStatusActive: 'Activo',
+    announcementStatusExpired: 'Expirado',
+    noAnnouncements: 'Sin anuncios',
   },
   'fr': {
     title: 'Retypographie',
@@ -176,6 +228,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Pas principalement commercial, sans publicité excessive ou contenu promotionnel qui interfere avec la lecture',
     applicationStandard4: 'Le demandeur a un certain niveau d\'éducation de base (de préférence un diplôme d\'enseignement secondaire ou équivalent)',
     noSerendipity: 'Pas encore de sérendipités',
+    // 公告相关翻译
+    announcementTypeInfo: 'Info',
+    announcementTypeWarning: 'Avertissement',
+    announcementTypeSuccess: 'Succès',
+    announcementTypeError: 'Erreur',
+    announcementTypeNotice: 'Avis',
+    announcementTypeUpdate: 'Mise à jour',
+    announcementTypeEvent: 'Événement',
+    announcementTypeImportant: 'Important',
+    announcementTypeCasual: 'Décontracté',
+    announcementStatusActive: 'Actif',
+    announcementStatusExpired: 'Expiré',
+    noAnnouncements: 'Pas d\'annonces',
   },
   'ja': {
     title: '再組版',
@@ -211,6 +276,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '主に商業目的ではなく、読み物を妨げる過度な広告や宣伝コンテンツがないこと',
     applicationStandard4: '申請者が一定の基本教育背景を持っていること（望ましくは高校卒業または同等の教育を修了していること）',
     noSerendipity: 'まだセレンディピティがありません',
+    // 公告相关翻译
+    announcementTypeInfo: '情報',
+    announcementTypeWarning: '警告',
+    announcementTypeSuccess: '成功',
+    announcementTypeError: 'エラー',
+    announcementTypeNotice: '通知',
+    announcementTypeUpdate: '更新',
+    announcementTypeEvent: 'イベント',
+    announcementTypeImportant: '重要',
+    announcementTypeCasual: 'カジュアル',
+    announcementStatusActive: 'アクティブ',
+    announcementStatusExpired: '期限切れ',
+    noAnnouncements: 'お知らせはありません',
   },
   'ko': {
     title: '재조판',
@@ -246,6 +324,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '주로 상업적이지 않으며, 읽기를 방해하는 과도한 광고 또는 홍보 콘텐츠가 없습니다',
     applicationStandard4: '신청자는 일정한 기본 교육 배경을 가지고 있습니다 (바람직하게는 고등학교 졸업 또는 동등한 교육을 이수했습니다)',
     noSerendipity: '아직 세렌디피티가 없습니다',
+    // 公告相关翻译
+    announcementTypeInfo: '정보',
+    announcementTypeWarning: '경고',
+    announcementTypeSuccess: '성공',
+    announcementTypeError: '오류',
+    announcementTypeNotice: '공지',
+    announcementTypeUpdate: '업데이트',
+    announcementTypeEvent: '이벤트',
+    announcementTypeImportant: '중요',
+    announcementTypeCasual: '캐주얼',
+    announcementStatusActive: '활성',
+    announcementStatusExpired: '만료',
+    noAnnouncements: '공지사항이 없습니다',
   },
   'pl': {
     title: 'Przeskład',
@@ -281,6 +372,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Nie jest przede wszystkim komercyjna, bez nadmiernej reklamy lub treści promocyjnych, które zakłócają czytanie',
     applicationStandard4: 'Aplikant ma pewną podstawową edukację (preferowane ukończenie szkoły średniej lub edukacji równoważnej)',
     noSerendipity: 'Jeszcze żadnych serendypii',
+    // 公告相关翻译
+    announcementTypeInfo: 'Informacja',
+    announcementTypeWarning: 'Uwaga',
+    announcementTypeSuccess: 'Sukces',
+    announcementTypeError: 'Błąd',
+    announcementTypeNotice: 'Zauważenie',
+    announcementTypeUpdate: 'Aktualizacja',
+    announcementTypeEvent: 'Wydarzenie',
+    announcementTypeImportant: 'Ważne',
+    announcementTypeCasual: 'Swobodny',
+    announcementStatusActive: 'Aktywny',
+    announcementStatusExpired: 'Wygasły',
+    noAnnouncements: 'Brak ogłoszeń',
   },
   'pt': {
     title: 'Retipografia',
@@ -316,6 +420,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Não é principalmente comercial, sem publicidade excessiva ou conteúdo promocional que interfere com a leitura',
     applicationStandard4: 'O solicitante tem certo background educacional básico (preferencialmente concluído o ensino médio ou educação equivalente)',
     noSerendipity: 'Ainda sem serendipidades',
+    // 公告相关翻译
+    announcementTypeInfo: 'Info',
+    announcementTypeWarning: 'Aviso',
+    announcementTypeSuccess: 'Sucesso',
+    announcementTypeError: 'Erro',
+    announcementTypeNotice: 'Aviso',
+    announcementTypeUpdate: 'Atualização',
+    announcementTypeEvent: 'Evento',
+    announcementTypeImportant: 'Importante',
+    announcementTypeCasual: 'Casual',
+    announcementStatusActive: 'Ativo',
+    announcementStatusExpired: 'Expirado',
+    noAnnouncements: 'Sem anúncios',
   },
   'ru': {
     title: 'Переверстка',
@@ -351,6 +468,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Не является преимущественно коммерческим, без избыточной рекламы или промо-контента, мешающего чтению',
     applicationStandard4: 'Заявитель имеет определенный базовый образовательный уровень (предferably закончил среднюю школу или эквивалентное образование)',
     noSerendipity: 'Пока нет серендипити',
+    // 公告相关翻译
+    announcementTypeInfo: 'Информация',
+    announcementTypeWarning: 'Предупреждение',
+    announcementTypeSuccess: 'Успех',
+    announcementTypeError: 'Ошибка',
+    announcementTypeNotice: 'Уведомление',
+    announcementTypeUpdate: 'Обновление',
+    announcementTypeEvent: 'Событие',
+    announcementTypeImportant: 'Важно',
+    announcementTypeCasual: 'Неформально',
+    announcementStatusActive: 'Активно',
+    announcementStatusExpired: 'Истек',
+    noAnnouncements: 'Нет объявлений',
   },
   'zh': {
     title: '重新编排',
@@ -386,6 +516,19 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '非以商业化为主，广告、推广内容不过多干扰阅读',
     applicationStandard4: '申请者具备一定的基本教育背景（最好完成高中或同等学力层次教育）',
     noSerendipity: '暂无偶得内容',
+    // 公告相关翻译
+    announcementTypeInfo: '信息',
+    announcementTypeWarning: '警告',
+    announcementTypeSuccess: '成功',
+    announcementTypeError: '错误',
+    announcementTypeNotice: '通知',
+    announcementTypeUpdate: '更新',
+    announcementTypeEvent: '活动',
+    announcementTypeImportant: '重要',
+    announcementTypeCasual: '休闲',
+    announcementStatusActive: '活跃',
+    announcementStatusExpired: '已过期',
+    noAnnouncements: '暂无公告',
   },
   'zh-tw': {
     title: '重新編排',
@@ -421,5 +564,18 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '非以商業化為主，廣告、推廣內容不過多干擾閱讀',
     applicationStandard4: '申請者具備一定的基本教育背景（最好完成高中或同等學力層次教育）',
     noSerendipity: '暫無偶得內容',
+    // 公告相關翻譯
+    announcementTypeInfo: '資訊',
+    announcementTypeWarning: '警告',
+    announcementTypeSuccess: '成功',
+    announcementTypeError: '錯誤',
+    announcementTypeNotice: '通知',
+    announcementTypeUpdate: '更新',
+    announcementTypeEvent: '活動',
+    announcementTypeImportant: '重要',
+    announcementTypeCasual: '休閑',
+    announcementStatusActive: '活躍',
+    announcementStatusExpired: '已過期',
+    noAnnouncements: '暫無公告',
   },
 }
