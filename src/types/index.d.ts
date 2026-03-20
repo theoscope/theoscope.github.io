@@ -11,6 +11,7 @@ export interface ThemeConfig {
   site: {
     title: string
     subtitle: string
+    email: string
     description: string
     i18nTitle: boolean
     author: string

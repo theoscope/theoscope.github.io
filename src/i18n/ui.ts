@@ -34,6 +34,9 @@ interface Translation {
   applicationStandard3: string
   applicationStandard4: string
   noSerendipity: string
+  // 留言板相关翻译
+  guestbookTitle: string
+  guestbookDescription: string
   // 公告相关翻译
   announcementTypeInfo: string
   announcementTypeWarning: string
@@ -84,6 +87,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Nicht primär kommerziell, ohne übermäßige Werbung oder Werbeinhalte, die das Lesen stören',
     applicationStandard4: 'Bewerber verfügen über eine gewisse Grundbildung (am besten Schulabschluss oder gleichwertige Bildung)',
     noSerendipity: 'Noch keine Serendipitäten',
+    // 留言板相关翻译
+    guestbookTitle: 'Gästebuch',
+    guestbookDescription: 'Bitte hinterlassen Sie Ihre Gedanken, Vorschläge oder einfach nur einen Gruß! Ihr Feedback ist für mich sehr wichtig und hilft mir, diesen Blog zu verbessern.',
     // 公告相关翻译
     announcementTypeInfo: 'Information',
     announcementTypeWarning: 'Warnung',
@@ -132,6 +138,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Not primarily commercial, with no excessive advertising or promotional content that interferes with reading',
     applicationStandard4: 'Applicants have a certain basic educational background (preferably completed high school or equivalent education)',
     noSerendipity: 'No serendipities yet',
+    // 留言板相关翻译
+    guestbookTitle: 'Guestbook',
+    guestbookDescription: 'Welcome to leave your thoughts, suggestions, or just say hello! Your feedback is very important to me and helps me improve this blog.',
     // 公告相关翻译
     announcementTypeInfo: 'Info',
     announcementTypeWarning: 'Warning',
@@ -180,6 +189,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'No es principalmente comercial, sin publicidad excesiva o contenido promocional que interfiere con la lectura',
     applicationStandard4: 'El solicitante tiene cierto nivel educativo básico (preferiblemente haber completado la escuela secundaria o educación equivalente)',
     noSerendipity: 'Todavía no hay serendipias',
+    // 留言板相关翻译
+    guestbookTitle: 'Libro de visitas',
+    guestbookDescription: '¡Bienvenido a dejar tus pensamientos, sugerencias o simplemente saludar! Tu comentario es muy importante para mí y me ayuda a mejorar este blog.',
     // 公告相关翻译
     announcementTypeInfo: 'Información',
     announcementTypeWarning: 'Advertencia',
@@ -228,6 +240,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Pas principalement commercial, sans publicité excessive ou contenu promotionnel qui interfere avec la lecture',
     applicationStandard4: 'Le demandeur a un certain niveau d\'éducation de base (de préférence un diplôme d\'enseignement secondaire ou équivalent)',
     noSerendipity: 'Pas encore de sérendipités',
+    // 留言板相关翻译
+    guestbookTitle: 'Livre d\'or',
+    guestbookDescription: 'Bienvenue pour laisser vos pensées, suggestions ou simplement dire bonjour ! Votre feedback est très important pour moi et m\'aide à améliorer ce blog.',
     // 公告相关翻译
     announcementTypeInfo: 'Info',
     announcementTypeWarning: 'Avertissement',
@@ -276,6 +291,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '主に商業目的ではなく、読み物を妨げる過度な広告や宣伝コンテンツがないこと',
     applicationStandard4: '申請者が一定の基本教育背景を持っていること（望ましくは高校卒業または同等の教育を修了していること）',
     noSerendipity: 'まだセレンディピティがありません',
+    // 留言板相关翻译
+    guestbookTitle: 'ゲストブック',
+    guestbookDescription: 'ご意見、ご感想、またはただ挨拶を残してください！あなたのフィードバックは私にとって非常に重要であり、このブログの改善に役立ちます。',
     // 公告相关翻译
     announcementTypeInfo: '情報',
     announcementTypeWarning: '警告',
@@ -324,6 +342,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '주로 상업적이지 않으며, 읽기를 방해하는 과도한 광고 또는 홍보 콘텐츠가 없습니다',
     applicationStandard4: '신청자는 일정한 기본 교육 배경을 가지고 있습니다 (바람직하게는 고등학교 졸업 또는 동등한 교육을 이수했습니다)',
     noSerendipity: '아직 세렌디피티가 없습니다',
+    // 留言板相关翻译
+    guestbookTitle: '방명록',
+    guestbookDescription: '당신의 생각, 제안, 또는 그냥 인사를 남겨주세요! 당신의 피드백은 저에게 매우 중요하며 이 블로그를 개선하는 데 도움이 됩니다.',
     // 公告相关翻译
     announcementTypeInfo: '정보',
     announcementTypeWarning: '경고',
@@ -372,6 +393,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Nie jest przede wszystkim komercyjna, bez nadmiernej reklamy lub treści promocyjnych, które zakłócają czytanie',
     applicationStandard4: 'Aplikant ma pewną podstawową edukację (preferowane ukończenie szkoły średniej lub edukacji równoważnej)',
     noSerendipity: 'Jeszcze żadnych serendypii',
+    // 留言板相关翻译
+    guestbookTitle: 'Księga gości',
+    guestbookDescription: 'Zachęcam do zostawienia swoich myśli, sugestii lub po prostu powitania! Twoje opinie są dla mnie bardzo ważne i pomagają mi ulepszać ten blog.',
     // 公告相关翻译
     announcementTypeInfo: 'Informacja',
     announcementTypeWarning: 'Uwaga',
@@ -420,6 +444,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Não é principalmente comercial, sem publicidade excessiva ou conteúdo promocional que interfere com a leitura',
     applicationStandard4: 'O solicitante tem certo background educacional básico (preferencialmente concluído o ensino médio ou educação equivalente)',
     noSerendipity: 'Ainda sem serendipidades',
+    // 留言板相关翻译
+    guestbookTitle: 'Livre de visitas',
+    guestbookDescription: 'Bem-vindo para deixar suas ideias, sugestões ou apenas um olá! Seu feedback é muito importante para mim e me ajuda a melhorar este blog.',
     // 公告相关翻译
     announcementTypeInfo: 'Info',
     announcementTypeWarning: 'Aviso',
@@ -468,6 +495,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: 'Не является преимущественно коммерческим, без избыточной рекламы или промо-контента, мешающего чтению',
     applicationStandard4: 'Заявитель имеет определенный базовый образовательный уровень (предferably закончил среднюю школу или эквивалентное образование)',
     noSerendipity: 'Пока нет серендипити',
+    // 留言板相关翻译
+    guestbookTitle: 'Гостевая книга',
+    guestbookDescription: 'Добро пожаловать, оставьте свои мысли, предложения или просто приветствие! Ваш отзыв очень важен для меня и помогает мне улучшать этот блог.',
     // 公告相关翻译
     announcementTypeInfo: 'Информация',
     announcementTypeWarning: 'Предупреждение',
@@ -516,6 +546,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '非以商业化为主，广告、推广内容不过多干扰阅读',
     applicationStandard4: '申请者具备一定的基本教育背景（最好完成高中或同等学力层次教育）',
     noSerendipity: '暂无偶得内容',
+    // 留言板相关翻译
+    guestbookTitle: '留言板',
+    guestbookDescription: '欢迎留下你的想法、建议，或者只是打个招呼！你的反馈对我来说非常重要，有助于我改进这个博客。',
     // 公告相关翻译
     announcementTypeInfo: '信息',
     announcementTypeWarning: '警告',
@@ -564,6 +597,9 @@ export const ui: Record<Language, Translation> = {
     applicationStandard3: '非以商業化為主，廣告、推廣內容不過多干擾閱讀',
     applicationStandard4: '申請者具備一定的基本教育背景（最好完成高中或同等學力層次教育）',
     noSerendipity: '暫無偶得內容',
+    // 留言板相關翻譯
+    guestbookTitle: '留言板',
+    guestbookDescription: '歡迎留下你的想法、建議，或者只是打個招呼！你的反饋對我來說非常重要，有助於我改進這個部落格。',
     // 公告相關翻譯
     announcementTypeInfo: '資訊',
     announcementTypeWarning: '警告',

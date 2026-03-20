@@ -31,19 +31,9 @@ const navItems = [
     className: getNavItemClass(isTagActive),
   },
   {
-    href: '/about/',
-    label: currentUI.about,
-    className: getNavItemClass(isAboutActive),
-  },
-  {
-    href: '/guestbook/',
-    label: currentUI.guestbook || 'Guestbook',
-    className: getNavItemClass(isGuestbookActive),
-  },
-  {
-    href: '/announcements/',
-    label: currentUI.announcements || 'Announcements',
-    className: getNavItemClass(isAnnouncementsActive),
+    href: '/serendipity/',
+    label: currentUI.serendipity || 'Serendipity',
+    className: getNavItemClass(isSerendipityActive),
   },
   {
     href: '/links/',
@@ -51,9 +41,19 @@ const navItems = [
     className: getNavItemClass(isLinksActive),
   },
   {
-    href: '/serendipity/',
-    label: currentUI.serendipity || 'Serendipity',
-    className: getNavItemClass(isSerendipityActive),
+    href: '/announcements/',
+    label: currentUI.announcements || 'Announcements',
+    className: getNavItemClass(isAnnouncementsActive),
+  },
+  {
+    href: '/guestbook/',
+    label: currentUI.guestbook || 'Guestbook',
+    className: getNavItemClass(isGuestbookActive),
+  },
+  {
+    href: '/about/',
+    label: currentUI.about,
+    className: getNavItemClass(isAboutActive),
   },
 ]
 ---

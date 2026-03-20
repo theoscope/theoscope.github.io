@@ -7,6 +7,8 @@ export const themeConfig: ThemeConfig = {
     title: 'Retypeset2.0',
     // site subtitle
     subtitle: 'fixed and update',
+    // site email
+    email: 'email@example.com',
     // site description
     description: 'Retypeset is a static blog theme based on the Astro framework. Inspired by Typography, Retypeset establishes a new visual standard and reimagines the layout of all pages, creating a reading experience reminiscent of paper books, reviving the beauty of typography. Details in every sight, elegance in every space.',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
@@ -82,15 +84,15 @@ export const themeConfig: ThemeConfig = {
     // giscus
     // https://giscus.app/
     giscus: {
-      repo: '',
-      repoId: '',
-      category: '',
-      categoryId: '',
+      repo: 'theoscope/theoscope.github.io',
+      repoId: 'R_kgDORi896w',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDORi89684C43Sw',
       mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
       emitMetadata: '0',
-      inputPosition: 'bottom',
+      inputPosition: 'top',
     },
     // twikoo
     // https://twikoo.js.org/
@@ -101,8 +103,8 @@ export const themeConfig: ThemeConfig = {
     // waline
     // https://waline.js.org/en/
     waline: {
-      // server url
-      serverURL: 'https://kerwencomments.netlify.app/.netlify/functions/comment/',
+      // server urlhttps://kerwencomments.netlify.app/.netlify/functions/comment/
+      serverURL: '',
       // emoji url
       emoji: [
         'https://unpkg.com/@waline/emojis@1.2.0/tw-emoji',

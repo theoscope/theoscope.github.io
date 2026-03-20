@@ -21,24 +21,31 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
   <div class="uno-decorative-line" />
 
   <!-- Page Title -->
-  <div class="mb-12 text-center">
-    <h1 class="mb-4 text-4xl font-bold">{currentUI.links || 'Links'}</h1>
-    <p class="mx-auto max-w-2xl text-secondary/70">{currentUI.linksDescription || '我的朋友们，一起在网络世界中探索与成长'}</p>
+  <div class="mb-16 text-center">
+    <h1
+      class="mb-4 text-4xl font-bold"
+      style="opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;"
+    >{currentUI.links || 'Links'}</h1>
+    <p
+      class="mx-auto max-w-2xl text-secondary/70"
+      style="opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.2s;"
+    >{currentUI.linksDescription || '我的朋友们，一起在网络世界中探索与成长'}</p>
   </div>
 
   <!-- Links Grid -->
-  <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 md:grid-cols-2">
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-1 md:grid-cols-2">
     {links.length > 0
 ? (
-      links.map(link => (
+      links.map((link, index) => (
         <a
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="group block border border-secondary/20 rounded-lg p-6 transition-all duration-300 hover:(transform border-primary/50 bg-background/80 shadow-lg -translate-y-1)"
+          class="group border-border cubic-bezier(0.165, 0.84, 0.44, 1) block border rounded-xl p-8 transition-all duration-400 hover:(border-primary/40 bg-primary/5 shadow-lg -translate-y-1)"
+          style={`opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: ${0.3 + index * 0.1}s;`}
         >
-          <div class="mb-5 flex items-center gap-4">
-            <div class="h-14 w-14 flex-shrink-0 overflow-hidden border-2 border-secondary/20 rounded-full transition-all duration-300 group-hover:border-primary/50">
+          <div class="mb-6 flex items-center gap-5">
+            <div class="border-border h-16 w-16 flex-shrink-0 overflow-hidden border-2 rounded-full transition-all duration-400 group-hover:border-primary/40">
               <img
                 src={link.avatar}
                 alt={link.name}
@@ -46,25 +53,25 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
               />
             </div>
             <div class="min-w-0 flex-1">
-              <h3 class="truncate text-xl font-bold transition-colors duration-300 group-hover:text-primary">
+              <h3 class="truncate text-xl font-bold transition-colors duration-400 group-hover:text-primary">
                 {link.name}
               </h3>
-              <p class="mt-1 truncate text-sm text-secondary/60">
+              <p class="mt-2 truncate text-sm text-secondary/60">
                 {link.description}
               </p>
             </div>
           </div>
-          <div class="flex items-center gap-1 text-sm text-primary/80 font-medium transition-all duration-300 group-hover:gap-2">
+          <div class="flex items-center gap-1.5 text-sm text-primary/80 font-medium transition-all duration-400 group-hover:gap-2.5">
             <span>{currentUI.visitWebsite || '访问网站'}</span>
-            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            <span class="transition-transform duration-400 group-hover:translate-x-1.5">→</span>
           </div>
         </a>
       ))
     )
 : (
-      <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
-        <div class="mb-6 h-20 w-20 flex items-center justify-center rounded-full bg-secondary/10">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link text-secondary/40"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+      <div class="col-span-full flex flex-col items-center justify-center py-24 text-center">
+        <div class="bg-muted mb-8 h-24 w-24 flex items-center justify-center rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link text-secondary/40"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
         </div>
         <h3 class="mb-2 text-xl font-medium">{currentUI.noLinks || '暂无友链'}</h3>
         <p class="max-w-md text-secondary/60">{currentUI.noLinksDesc || '当有新的友链时，它们会出现在这里'}</p>
@@ -108,7 +115,10 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
   }
   }
   </script>
-    <div class="rounded-xl bg-background/50 p-8 shadow-sm">
+    <div
+      class="border-border border rounded-xl bg-background/50 p-8 shadow-sm"
+      style="opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.6s;"
+    >
       <div class="mb-8 flex items-center gap-3">
         <div class="h-12 w-12 flex items-center justify-center rounded-full bg-primary/10">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart text-primary"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -122,27 +132,27 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
         <div class="py-2">
           <h3 class="mb-6 text-lg font-semibold">{currentUI.applicationStandards || '申请标准'}</h3>
           <ul class="space-y-4">
-            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
-              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+            <li class="flex items-start gap-3 transition-all duration-400 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-400 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-400 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
               </div>
               <span class="text-secondary">{currentUI.applicationStandard1 || '贵站有一定深度的原创内容输出（读书笔记、专业研究、技术钻研或深度思考类内容）'}</span>
             </li>
-            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
-              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+            <li class="flex items-start gap-3 transition-all duration-400 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-400 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-400 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
               </div>
               <span class="text-secondary">{currentUI.applicationStandard2 || '建站时间至少半年以上，且已有十篇以上的原创博文'}</span>
             </li>
-            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
-              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+            <li class="flex items-start gap-3 transition-all duration-400 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-400 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-400 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
               </div>
               <span class="text-secondary">{currentUI.applicationStandard3 || '非以商业化为主，广告、推广内容不过多干扰阅读'}</span>
             </li>
-            <li class="flex items-start gap-3 transition-all duration-300 hover:translate-x-1">
-              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-300 hover:bg-green-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-300 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
+            <li class="flex items-start gap-3 transition-all duration-400 hover:translate-x-1">
+              <div class="mt-1 h-5 w-5 flex flex-shrink-0 items-center justify-center rounded-full bg-green-500/10 transition-all duration-400 hover:bg-green-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500 transition-all duration-400 hover:scale-110"><path d="M20 6 9 17l-5-5"></path></svg>
               </div>
               <span class="text-secondary">{currentUI.applicationStandard4 || '申请者具备一定的基本教育背景（最好完成高中或同等学力层次教育）'}</span>
             </li>
@@ -150,14 +160,14 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
         </div>
 
         <!-- Divider -->
-        <div class="h-px bg-secondary/20"></div>
+        <div class="bg-border h-px"></div>
 
         <!-- Site Information -->
         <div class="py-2">
           <div class="mb-6 flex items-center justify-between">
             <h3 class="text-lg font-semibold">{currentUI.siteInformation || '本站信息'}</h3>
             <button
-              class="rounded-full bg-secondary/10 px-4 py-1.5 text-sm text-secondary font-medium transition-all duration-300 hover:bg-secondary/20"
+              class="border-border bg-muted hover:bg-muted/80 border rounded-full px-4 py-1.5 text-sm text-secondary font-medium transition-all duration-400"
               onclick="copySiteInfo(this)"
               data-copied={currentUI.copied || '已复制'}
               data-copy-failed={currentUI.copyFailed || '复制失败'}
@@ -187,7 +197,7 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
       </div>
 
       <!-- Divider -->
-      <div class="h-px bg-secondary/20"></div>
+      <div class="bg-border h-px"></div>
 
       <!-- Email Application -->
       <div class="mt-8 py-2">
@@ -197,16 +207,19 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
         </div>
         <p class="mb-6 text-secondary">{currentUI.applyByEmailDesc || '您也可以使用邮件来提交友链申请'}</p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="mailto:lapiscafe@foxmail.com" class="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-md">
+          <a href={`mailto:${themeConfig.site.email}`} target="_blank" class="inline-flex items-center gap-2 border border-primary rounded-xl bg-primary/5 px-6 py-3 text-primary font-medium transition-all duration-400 hover:bg-primary/10 hover:shadow-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-            lapiscafe@foxmail.com
+            {themeConfig.site.email}
           </a>
         </div>
       </div>
     </div>
 
     <!-- Comment Section -->
-    <div class="mt-12">
+    <div
+      class="mt-12"
+      style="opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.8s;"
+    >
       <Comment />
     </div>
   </div>

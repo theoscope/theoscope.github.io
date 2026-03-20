@@ -7,13 +7,24 @@ const soundTypes = {
 type SoundType = typeof soundTypes[keyof typeof soundTypes]
 
 const volumeSettings: Record<SoundType, number> = {
-  [soundTypes.click]: 0.8,
-  [soundTypes.typing]: 0.4,
+  [soundTypes.click]: 0.3,
+  [soundTypes.typing]: 0.1,
 }
 
 const clickTargets = [
   '#language-switcher',
   '#theme-toggle-button',
+  'a:not([href^="http"]):not([href^="https"]):not([target="_blank"])',
+  'button',
+  'input[type="button"]',
+  'input[type="submit"]',
+  'input[type="reset"]',
+  '[role="button"]',
+  '.nav-item',
+  '.tag-link',
+  '.link-item',
+  '.btn',
+  '.button',
 ] as const
 
 const typingTargets = [
@@ -138,14 +149,9 @@ class SoundEffectManager {
 
 const soundManager = new SoundEffectManager()
 
-// Handle click events on interactive elements
+// Handle click events on all elements including blank areas
 function handleGlobalClick(event: MouseEvent) {
   if (isMobileDevice()) {
-    return
-  }
-
-  const target = event.target as Element | null
-  if (!target?.closest(clickSelector)) {
     return
   }
 
