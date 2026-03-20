@@ -85,24 +85,24 @@ const currentUI = ui[currentLang as keyof typeof ui] ?? {}
   // 全局复制函数
   function copySiteInfo(button) {
     // 从页面上获取站点信息
-    let siteInfoSection = button.closest('.py-2').querySelector('.space-y-4')
+    const siteInfoSection = button.closest('.py-2').querySelector('.space-y-4')
   if (siteInfoSection) {
-      let siteInfoRows = siteInfoSection.querySelectorAll('div')
+      const siteInfoRows = siteInfoSection.querySelectorAll('div')
       let textToCopy = ''
 
       siteInfoRows.forEach((row) => {
-        let label = row.querySelector('span:first-child').textContent.trim()
-        let value = row.querySelector('span:last-child').textContent.trim()
+        const label = row.querySelector('span:first-child').textContent.trim()
+        const value = row.querySelector('span:last-child').textContent.trim()
         textToCopy += `${label}: ${value}\n`
       })
 
       // 获取多语言文本
-      let copiedText = button.getAttribute('data-copied') || '已复制'
-      let copyFailedText = button.getAttribute('data-copy-failed') || '复制失败'
+      const copiedText = button.getAttribute('data-copied') || '已复制'
+      const copyFailedText = button.getAttribute('data-copy-failed') || '复制失败'
 
       // 复制到剪贴板
       navigator.clipboard.writeText(textToCopy).then(() => {
-        let originalText = button.textContent
+        const originalText = button.textContent
         button.textContent = copiedText
         button.classList.add('bg-green-500/10', 'text-green-500')
         setTimeout(() => {
