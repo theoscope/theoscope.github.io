@@ -79,33 +79,39 @@ export function getStaticPaths() {
   </div>
 
   <script>
-let openId = null
+let openId: string | null = null
 const collapsedHeight = '90px'
 
 function checkContentHeight() {
   document.querySelectorAll('#post-content').forEach((content) => {
     const article = content.closest('article')
-    const button = article.querySelector('button')
-    const contentHeight = content.scrollHeight
+    if (article) {
+      const button = article.querySelector('button')
+      const contentHeight = content.scrollHeight
 
-    // 如果内容高度小于等于收起高度，隐藏按钮
-    if (contentHeight <= Number.parseInt(collapsedHeight)) {
-      button.style.display = 'none'
-      content.style.maxHeight = 'none'
-    }
-    else {
-      button.style.display = 'block'
-      content.style.maxHeight = collapsedHeight
+      // 如果内容高度小于等于收起高度，隐藏按钮
+      if (contentHeight <= Number.parseInt(collapsedHeight)) {
+        if (button) {
+          button.style.display = 'none'
+        }
+        (content as HTMLElement).style.maxHeight = 'none'
+      }
+      else {
+        if (button) {
+          button.style.display = 'block'
+        }
+        (content as HTMLElement).style.maxHeight = collapsedHeight
+      }
     }
   })
 }
 
-function setOpenId(id) {
+function setOpenId(id: string) {
   // 如果点击的是当前展开的文章，则收起它
   if (openId === id) {
     const openContent = document.querySelector(`article[data-id="${id}"] #post-content`)
     if (openContent) {
-      openContent.style.maxHeight = collapsedHeight
+      (openContent as HTMLElement).style.maxHeight = collapsedHeight
     }
     const btn = document.querySelector(`article[data-id="${id}"] button`)
     if (btn) {
@@ -116,7 +122,7 @@ function setOpenId(id) {
   else {
     // 收起所有文章
     document.querySelectorAll('#post-content').forEach((content) => {
-      content.style.maxHeight = collapsedHeight
+      (content as HTMLElement).style.maxHeight = collapsedHeight
     })
     document.querySelectorAll('button[data-id]').forEach((btn) => {
       btn.textContent = '展开'
@@ -126,7 +132,7 @@ function setOpenId(id) {
     openId = id
     const openContent = document.querySelector(`article[data-id="${id}"] #post-content`)
     if (openContent) {
-      openContent.style.maxHeight = `${openContent.scrollHeight}px`
+      (openContent as HTMLElement).style.maxHeight = `${openContent.scrollHeight}px`
     }
     const btn = document.querySelector(`article[data-id="${id}"] button`)
     if (btn) {
@@ -142,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('button[data-id]').forEach((button) => {
     button.addEventListener('click', () => {
-      const id = button.dataset.id
-      setOpenId(id)
+      const id = (button as HTMLElement).dataset.id
+      setOpenId(id as string)
     })
   })
 
