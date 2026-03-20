@@ -5,7 +5,7 @@
         <title>再組版</title>
         <link>https://theoscope.github.io/ja/</link>
         <description>Retypesetは、日本語では「再組版」と呼ばれる、Astroフレームワークをベースにした静的ブログテーマです。活版印字からデザインのインスピレーションを得て、新しい視覚的な規範を確立し、すべてのページのレイアウトを再構成することで、紙の書籍のような読書体験を提供し、版面の美しさを蘇らせます。見るものすべてが細部にこだわり、限られたスペースの中に優雅さを表現しています。</description>
-        <lastBuildDate>Fri, 20 Mar 2026 14:54:39 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 20 Mar 2026 15:17:26 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>ja</language>
