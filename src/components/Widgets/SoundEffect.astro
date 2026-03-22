@@ -38,6 +38,7 @@ const typingTargets = [
   '#wl-edit',
   // Giscus
   '.gsc-input-box',
+  '.gsc-comment-box-write',
   '.gsc-textarea',
 ] as const
 
@@ -51,7 +52,7 @@ const ignoredKeys = new Set([
   'CapsLock',
 ])
 
-const clickSelector = clickTargets.join(',')
+const _clickSelector = clickTargets.join(',')
 const typingSelector = typingTargets.join(',')
 
 function isMobileDevice(): boolean {
@@ -153,7 +154,7 @@ class SoundEffectManager {
 const soundManager = new SoundEffectManager()
 
 // Handle click events on all elements including blank areas
-function handleGlobalClick(event: MouseEvent) {
+function handleGlobalClick(_event: MouseEvent) {
   if (isMobileDevice()) {
     return
   }
@@ -175,7 +176,11 @@ function handleGlobalKeydown(event: KeyboardEvent) {
     return
   }
 
-  // 所有键盘敲击都播放音效
+  const target = event.target as Element | null
+  if (!target?.closest(typingSelector)) {
+    return
+  }
+
   soundManager.playSound(soundTypes.typing)
 }
 

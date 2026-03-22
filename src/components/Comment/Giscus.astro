@@ -12,7 +12,7 @@ const {
   reactionsEnabled = '1',
   emitMetadata = '0',
   inputPosition = 'bottom',
-  loading = 'lazy',
+  // theme = 'light_tritanopia',
 
 } = themeConfig.comment.giscus ?? {}
 
@@ -36,7 +36,6 @@ const giscusConfig = {
   reactionsEnabled,
   emitMetadata,
   inputPosition,
-  loading,
   lang: giscusLocaleMap[lang],
 }
 ---
@@ -54,8 +53,8 @@ let giscusContainer: HTMLElement | null = null
 function getThemeUrl() {
   const isDark = document.documentElement.classList.contains('dark')
   return isDark
-    ? `/themes/dark_tritanopia.css`
-    : `/themes/light_tritanopia.css`
+    ? `/giscus/theme-dark.css`
+    : `/giscus/theme-light.css`
 }
 
 function updateGiscusTheme() {
@@ -102,7 +101,6 @@ function setupGiscus() {
     script.async = true
     Object.assign(script.dataset, dataAttributes)
     script.src = 'https://giscus.app/client.js'
-
     giscusContainer.appendChild(script)
   }
   catch (error) {
