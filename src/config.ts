@@ -84,15 +84,16 @@ export const themeConfig: ThemeConfig = {
     // giscus
     // https://giscus.app/
     giscus: {
-      repo: 'theoscope/comment',
-      repoId: 'R_kgDORsTCKw',
+      repo: 'theoscope/theoscope.github.io',
+      repoId: 'R_kgDORi896w',
       category: 'Announcements',
-      categoryId: 'DIC_kwDORsTCK84C43fG',
+      categoryId: 'DIC_kwDORi89684C43Sw',
       mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
       emitMetadata: '0',
       inputPosition: 'top',
+      loading: 'lazy',
     },
     // twikoo
     // https://twikoo.js.org/

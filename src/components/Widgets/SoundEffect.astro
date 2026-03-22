@@ -36,6 +36,9 @@ const typingTargets = [
   '#wl-mail',
   '#wl-link',
   '#wl-edit',
+  // Giscus
+  '.gsc-input-box',
+  '.gsc-textarea',
 ] as const
 
 const ignoredKeys = new Set([
@@ -172,11 +175,7 @@ function handleGlobalKeydown(event: KeyboardEvent) {
     return
   }
 
-  const target = event.target as Element | null
-  if (!target?.closest(typingSelector)) {
-    return
-  }
-
+  // 所有键盘敲击都播放音效
   soundManager.playSound(soundTypes.typing)
 }
 

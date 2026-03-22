@@ -55,6 +55,7 @@ export interface ThemeConfig {
       reactionsEnabled?: '0' | '1'
       emitMetadata?: '0' | '1'
       inputPosition?: 'top' | 'bottom'
+      loading?: 'lazy' | 'eager' | 'auto'
     }
     twikoo?: {
       envId?: string
