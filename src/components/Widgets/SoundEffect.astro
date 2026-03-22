@@ -174,10 +174,10 @@ function handleGlobalKeydown(event: KeyboardEvent) {
     return
   }
 
-  const target = event.target as Element | null
-  if (!target?.closest(typingSelector)) {
-    return
-  }
+  // const target = event.target as Element | null
+  // if (!target?.closest(typingSelector)) {
+  //   return
+  // }
 
   soundManager.playSound(soundTypes.typing)
 }
