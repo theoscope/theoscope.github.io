@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx'
-import partytown from '@astrojs/partytown'
+// import partytown from '@astrojs/partytown'
 import sitemap from '@astrojs/sitemap'
 import Compress from 'astro-compress'
 import { defineConfig } from 'astro/config'
@@ -54,19 +54,6 @@ export default defineConfig({
       injectReset: true,
     }),
     mdx(),
-    partytown({
-      config: {
-        resolveUrl: (url) => {
-          // 把 URL 对象转为字符串
-          const urlStr = url.href;
-          if (urlStr.includes('giscus.app') || urlStr.includes('api.github.com') || urlStr.includes('github.githubassets.com')) {
-            return url;
-          }
-          return url;
-        },
-        forward: ['dataLayer.push', 'gtag'],
-      },
-    }),
     sitemap(),
     Compress({
       CSS: true,

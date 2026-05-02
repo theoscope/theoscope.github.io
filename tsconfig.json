@@ -2,9 +2,9 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "lib": ["esnext", "dom"],
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "allowJs": true
   },
