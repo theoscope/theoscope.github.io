@@ -203,16 +203,3 @@
 #waline .wl-like {
   --at-apply: 'mr-1.2';
 }
-/* 确保评论区的外层容器宽度足够 */
-#cusdis_thread {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto !important; /* 防止内容溢出 */
-}
-
-/* 针对Cusdis生成的iframe进行调整 */
-#cusdis_thread iframe {
-    width: 100% !important;
-    min-width: 100% !important;
-    border: none; /* 可选：移除边框让界面更干净 */
-}

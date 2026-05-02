@@ -8,30 +8,56 @@ export interface Props {
 const { pageId, pageUrl, pageTitle } = Astro.props;
 ---
 
-<div
-  id="cusdis_thread"
+<div id="cusdis_thread"
   data-host="https://cusdis.com"
   data-app-id="43fd2311-15a1-4d13-9d83-1d1ff2d7fd17"
   data-page-id={pageId}
   data-page-url={pageUrl}
   data-page-title={pageTitle}
+  data-theme="light"
 >
 </div>
 
 <script>
+  // 获取当前主题（从 localStorage）
+  const getCurrentTheme = () => {
+    const theme = localStorage.getItem('theme');
+    return theme === 'dark' ? 'dark' : 'light';
+  };
+
+  // 设置 Cusdis 主题（如果已经加载）
+  const setCusdisTheme = (theme : "dark" | "light") => {
+    if ((window as any).CUSDIS && (window as any).CUSDIS.setTheme) {
+      (window as any).CUSDIS.setTheme(theme);
+    }
+  };
+
+  // 加载 Cusdis 脚本
   function loadCusdis() {
     if ((window as any).CUSDIS) {
       (window as any).CUSDIS.render();
+      // 加载完成后立即设置主题
+      setCusdisTheme(getCurrentTheme());
     } else {
-      const script = document.createElement("script");
-      script.src = "/js/cusdis.es.js";
+      const script = document.createElement('script');
+      script.src = '/js/cusdis.es.js';
       script.async = true;
       script.defer = true;
+      script.onload = () => {
+        setCusdisTheme(getCurrentTheme());
+      };
       document.body.appendChild(script);
     }
   }
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadCusdis);
+
+  // 监听主题切换事件（需要你的主题切换按钮派发 'theme-changed'）
+  window.addEventListener('theme-changed', () => {
+    setCusdisTheme(getCurrentTheme());
+  });
+
+  // 初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCusdis);
   } else {
     loadCusdis();
   }

@@ -2,7 +2,7 @@ window.CUSDIS = {};
 const makeIframeContent = (target) => {
     const host = target.dataset.host || "https://cusdis.com";
     const iframeJsPath = target.dataset.iframe || `${host}/js/iframe.umd.js`;
-    const cssPath = `src/styles/cusdis.css`;
+    const cssPath = `/src/styles/cusdis.css`;
     return `<!DOCTYPE html>
 <html>
   <head>
@@ -36,6 +36,7 @@ function createIframe(target) {
     singleTonIframe.srcdoc = makeIframeContent(target);
     singleTonIframe.style.width = "100%";
     singleTonIframe.style.border = "0";
+    singleTonIframe.style.height = "600px";
     return singleTonIframe;
 }
 function postMessage(event, data) {
@@ -68,7 +69,7 @@ function listenEvent(iframe, target) {
                         break;
                     case "resize":
                         {
-                            iframe.style.height = Math.min(1000, Math.max(msg.data, 400)) + "px";
+                            iframe.style.height = msg.data + "px";
                         }
                         break;
                 }

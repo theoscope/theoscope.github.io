@@ -130,12 +130,16 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
           lang={currentLang}
         />
       )}
+
+      <div>
       <!-- Comment -->
+       <div class="mt-12.6 uno-decorative-line" />
       <Cusdis
         pageId={Astro.url.pathname}
         pageUrl={Astro.url.href}
         pageTitle={post.data.title}
       />
+      </div>
     </div>
   </article>
 </Layout>
