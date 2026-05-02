@@ -68,7 +68,7 @@ function listenEvent(iframe, target) {
                         break;
                     case "resize":
                         {
-                            iframe.style.height = msg.data + "px";
+                            iframe.style.height = Math.min(1000, Math.max(msg.data, 400)) + "px";
                         }
                         break;
                 }
