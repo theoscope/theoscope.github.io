@@ -59,7 +59,7 @@ export default defineConfig({
         resolveUrl: (url) => {
           // 把 URL 对象转为字符串
           const urlStr = url.href;
-          if (urlStr.includes('giscus.app/client.js')) {
+          if (urlStr.includes('giscus.app') || urlStr.includes('api.github.com') || urlStr.includes('github.githubassets.com')) {
             return url;
           }
           return url;
