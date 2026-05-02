@@ -8,7 +8,8 @@ export interface Props {
 const { pageId, pageUrl, pageTitle } = Astro.props;
 ---
 
-<div id="cusdis_thread"
+<div
+  id="cusdis_thread"
   data-host="https://cusdis.com"
   data-app-id="43fd2311-15a1-4d13-9d83-1d1ff2d7fd17"
   data-page-id={pageId}
@@ -22,15 +23,15 @@ const { pageId, pageUrl, pageTitle } = Astro.props;
     if ((window as any).CUSDIS) {
       (window as any).CUSDIS.render();
     } else {
-      const script = document.createElement('script');
-      script.src = 'https://cusdis.com/js/cusdis.es.js';
+      const script = document.createElement("script");
+      script.src = "/js/cusdis.es.js";
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
     }
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadCusdis);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadCusdis);
   } else {
     loadCusdis();
   }
