@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content'
 import type { Language } from '@/i18n/config'
 import { getCollection, render } from 'astro:content'
 import Comment from '@/components/Comment/Index.astro'
+import Cusdis from '@/components/Comment/Cusdis.astro'
 import PostDate from '@/components/PostDate.astro'
 import TagList from '@/components/TagList.astro'
 import BackButton from '@/components/Widgets/BackButton.astro'
@@ -130,7 +131,11 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
         />
       )}
       <!-- Comment -->
-      <Comment />
+      <Cusdis
+        pageId={Astro.url.pathname}
+        pageUrl={Astro.url.href}
+        pageTitle={post.data.title}
+      />
     </div>
   </article>
 </Layout>

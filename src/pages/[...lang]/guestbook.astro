@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import Comment from '@/components/Comment/Index.astro'
+import Cusdis from '@/components/Comment/Cusdis.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
 import { ui } from '@/i18n/ui'
@@ -44,7 +45,11 @@ const { Content } = guestbookEntry ? await render(guestbookEntry) : { Content: n
       class="mt-16"
       style="opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; animation-delay: 0.4s;"
     >
-      <Comment />
+      <Cusdis
+        pageId={Astro.url.pathname}
+        pageUrl={Astro.url.href}
+        pageTitle={"Guestbook"}
+      />
     </div>
   </div>
 </Layout>

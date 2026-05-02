@@ -1,0 +1,37 @@
+---
+// CusdisComments.astro
+export interface Props {
+  pageId: string;
+  pageUrl: string;
+  pageTitle: string;
+}
+const { pageId, pageUrl, pageTitle } = Astro.props;
+---
+
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="43fd2311-15a1-4d13-9d83-1d1ff2d7fd17"
+  data-page-id={pageId}
+  data-page-url={pageUrl}
+  data-page-title={pageTitle}
+>
+</div>
+
+<script>
+  function loadCusdis() {
+    if ((window as any).CUSDIS) {
+      (window as any).CUSDIS.render();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://cusdis.com/js/cusdis.es.js';
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCusdis);
+  } else {
+    loadCusdis();
+  }
+</script>
