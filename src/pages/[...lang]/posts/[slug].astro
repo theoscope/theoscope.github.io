@@ -100,6 +100,8 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
           {post.data.title}
         </span>
       </h1>
+      <span data-cusdis-count-page-id="{{ PAGE_ID }}">0</span> comments
+      <script defer data-host="https://cusdis.com" data-app-id="{{ 43fd2311-15a1-4d13-9d83-1d1ff2d7fd17 }}" src="https://cusdis.com/js/cusdis-count.umd.js"></script>
     </div>
 
     <!-- Date -->
@@ -143,3 +145,4 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
     </div>
   </article>
 </Layout>
+
