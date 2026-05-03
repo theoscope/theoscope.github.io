@@ -690,7 +690,9 @@ class NeteaseMiniPlayer {
       this.saveState()
     })
     this.audio.addEventListener('ended', async () => {
-      await this.nextSong()
+      // 保存当前播放状态，因为 ended 事件触发时 isPlaying 可能已被重置
+      const wasPlayingAtEnd = this.isPlaying
+      await this.nextSong(wasPlayingAtEnd)
     })
     this.audio.addEventListener('error', async (e) => {
       console.error('音频播放错误:', e)
@@ -1193,8 +1195,8 @@ class NeteaseMiniPlayer {
     }
   }
 
-  async nextSong() {
-    const wasPlaying = this.isPlaying
+  async nextSong(wasPlayingOverride = null) {
+    const wasPlaying = wasPlayingOverride !== null ? wasPlayingOverride : this.isPlaying
     if (this.playlist.length <= 1) {
       if (this.playMode === 'single') {
         this.audio.currentTime = 0

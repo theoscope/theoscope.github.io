@@ -78,6 +78,18 @@ const currentLang = getLangFromLocale(Astro.currentLocale)
 const slug = post.data.abbrlink || post.id
 const description = getPostDescription(post, 'meta')
 const { Content, headings, remarkPluginFrontmatter } = await render(post)
+
+// 获取所有文章并统计标签计数
+const allPosts = await getCollection('posts')
+const tagCountMap = new Map<string, number>()
+for (const p of allPosts) {
+  // 只统计非草稿文章
+  if (import.meta.env.DEV || !p.data.draft) {
+    p.data.tags?.forEach((tag) => {
+      tagCountMap.set(tag, (tagCountMap.get(tag) || 0) + 1)
+    })
+  }
+}
 ---
 
 <Layout
@@ -127,7 +139,7 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
       {post.data.tags?.length > 0 && (
         <div class="mt-12.6 uno-decorative-line" />
         <TagList
-          tags={post.data.tags.map(tag => ({ name: tag, count: 0 }))}
+          tags={post.data.tags.map(tag => ({ name: tag, count: tagCountMap.get(tag) || 0 }))}
           lang={currentLang}
         />
       )}
