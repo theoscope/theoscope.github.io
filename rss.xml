@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>檸檬的樹屋</title>
         <link>https://theoscope.github.io/</link>
         <description>嗯。。。看起來這裡什麼都有，卻又什麼都沒有</description>
-        <lastBuildDate>Sun, 03 May 2026 15:20:21 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 03 May 2026 16:05:35 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>zh</language>
         <copyright>Copyright © 2026 檸檬</copyright>
         <atom:link href="https://theoscope.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[Universal Post]]></title>
+            <link>https://theoscope.github.io/posts/tese/</link>
+            <guid isPermaLink="false">https://theoscope.github.io/posts/tese/</guid>
+            <pubDate>Mon, 24 Mar 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[This is a universal multilingual post with unspecified 'lang', displayed by default across all language-specific paths. Este es un artículo universal multilingüe sin definir 'lang', visible por defecto en todas las rutas de idiomas.]]></description>
+            <content:encoded><![CDATA[<pre><code>---
+title: Universal Post
+published: 2025-03-24
+# lang: ''
+---
+</code></pre>
+<p>Dies ist ein universeller mehrsprachiger Artikel ohne spezifizierte 'lang'-Angabe, der standardmäßig in allen sprachspezifischen Pfaden angezeigt wird.</p>
+<p>This is a universal multilingual post with unspecified 'lang', displayed by default across all language-specific paths.</p>
+<p>Este es un artículo universal multilingüe sin definir 'lang', visible por defecto en todas las rutas de idiomas.</p>
+<p>Ceci est un article universel multilingue sans spécification de 'lang', affiché par défaut dans tous les chemins spécifiques aux langues.</p>
+<p>これは言語パラメータ（lang）未指定の汎用マルチリンガル記事です。全言語パスでデフォルト表示されます。</p>
+<p>이것은 'lang'을 지정하지 않은 다국어 범용 기사로, 기본적으로 모든 언어별 경로에 표시됩니다.</p>
+<p>To jest uniwersalny wielojęzyczny artykuł bez określonego parametru 'lang', wyświetlany domyślnie we wszystkich ścieżkach specyficznych dla języka.</p>
+<p>Este é um artigo universal multilínguas sem definir 'lang', visível por padrão através de todas as rotas de linguagem.</p>
+<p>Это универсальная многоязычная статья без указания 'lang', отображаемая по умолчанию во всех языковых разделах.</p>
+<p>这是一篇未指定 lang 的多语言通用文章，默认显示在所有语言路径下。</p>
+<p>這是一篇未指定 lang 的多語言通用文章，預設顯示於所有語言路徑下。</p>
+]]></content:encoded>
+            <author>檸檬</author>
+        </item>
     </channel>
 </rss>

@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://theoscope.github.io/ja/</id>
     <title>檸檬的樹屋</title>
-    <updated>2026-05-03T15:20:21.095Z</updated>
+    <updated>2026-05-03T16:05:35.224Z</updated>
     <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
     <author>
         <name>檸檬</name>
@@ -13,4 +13,34 @@
     <link rel="self" href="https://theoscope.github.io/ja/atom.xml"/>
     <subtitle>嗯。。。看起來這裡什麼都有，卻又什麼都沒有</subtitle>
     <rights>Copyright © 2026 檸檬</rights>
+    <entry>
+        <title type="html"><![CDATA[Universal Post]]></title>
+        <id>https://theoscope.github.io/ja/posts/tese/</id>
+        <link href="https://theoscope.github.io/ja/posts/tese/"/>
+        <updated>2025-03-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This is a universal multilingual post with unspecified 'lang', displayed by default across all language-specific paths. Este es un artículo universal multilingüe sin definir 'lang', visible por defecto en todas las rutas de idiomas.]]></summary>
+        <content type="html"><![CDATA[<pre><code>---
+title: Universal Post
+published: 2025-03-24
+# lang: ''
+---
+</code></pre>
+<p>Dies ist ein universeller mehrsprachiger Artikel ohne spezifizierte 'lang'-Angabe, der standardmäßig in allen sprachspezifischen Pfaden angezeigt wird.</p>
+<p>This is a universal multilingual post with unspecified 'lang', displayed by default across all language-specific paths.</p>
+<p>Este es un artículo universal multilingüe sin definir 'lang', visible por defecto en todas las rutas de idiomas.</p>
+<p>Ceci est un article universel multilingue sans spécification de 'lang', affiché par défaut dans tous les chemins spécifiques aux langues.</p>
+<p>これは言語パラメータ（lang）未指定の汎用マルチリンガル記事です。全言語パスでデフォルト表示されます。</p>
+<p>이것은 'lang'을 지정하지 않은 다국어 범용 기사로, 기본적으로 모든 언어별 경로에 표시됩니다.</p>
+<p>To jest uniwersalny wielojęzyczny artykuł bez określonego parametru 'lang', wyświetlany domyślnie we wszystkich ścieżkach specyficznych dla języka.</p>
+<p>Este é um artigo universal multilínguas sem definir 'lang', visível por padrão através de todas as rotas de linguagem.</p>
+<p>Это универсальная многоязычная статья без указания 'lang', отображаемая по умолчанию во всех языковых разделах.</p>
+<p>这是一篇未指定 lang 的多语言通用文章，默认显示在所有语言路径下。</p>
+<p>這是一篇未指定 lang 的多語言通用文章，預設顯示於所有語言路徑下。</p>
+]]></content>
+        <author>
+            <name>檸檬</name>
+            <uri>https://theoscope.github.io/</uri>
+        </author>
+        <published>2025-03-24T00:00:00.000Z</published>
+    </entry>
 </feed>
