@@ -35,6 +35,17 @@ export const announcements: Announcement[] = [
     isActive: true,
     lang: 'zh',
   },
+  {
+    id: 'announcement-3',
+    version: 1,
+    title: '功能上新',
+    content: '上新音乐组件！但是文章界面切换到其他界面后音乐会重新开始，所以可能会有点麻烦，后续我们会优化这个问题的！',
+    confirmText: '我知道了',
+    type: 'update',
+    createdAt: '2026-05-03',
+    isActive: true,
+    lang: 'zh',
+  },
 ]
 
 export function getActiveAnnouncements(lang: string = ''): Announcement[] {

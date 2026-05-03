@@ -27,6 +27,14 @@ const GlobalAudioManager = {
     }
 };
 
+const PlayerStateStore = {
+    get state() {
+        if (typeof window === 'undefined') return {};
+        window.__NeteaseMiniPlayerState = window.__NeteaseMiniPlayerState || {};
+        return window.__NeteaseMiniPlayerState;
+    }
+};
+
 const ICONS = {
     prev: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M556.2 541.6C544.2 546.6 530.5 543.8 521.3 534.7L352 365.3L352 512C352 524.9 344.2 536.6 332.2 541.6C320.2 546.6 306.5 543.8 297.3 534.7L128 365.3L128 512C128 529.7 113.7 544 96 544C78.3 544 64 529.7 64 512L64 128C64 110.3 78.3 96 96 96C113.7 96 128 110.3 128 128L128 274.7L297.4 105.4C306.6 96.2 320.3 93.5 332.3 98.5C344.3 103.5 352 115.1 352 128L352 274.7L521.4 105.3C530.6 96.1 544.3 93.4 556.3 98.4C568.3 103.4 576 115.1 576 128L576 512C576 524.9 568.2 536.6 556.2 541.6z"/></svg>`,
     next: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M83.8 541.6C95.8 546.6 109.5 543.8 118.7 534.7L288 365.3L288 512C288 524.9 295.8 536.6 307.8 541.6C319.8 546.6 333.5 543.8 342.7 534.7L512 365.3L512 512C512 529.7 526.3 544 544 544C561.7 544 576 529.7 576 512L576 128C576 110.3 561.7 96 544 96C526.3 96 512 110.3 512 128L512 274.7L342.6 105.3C333.4 96.1 319.7 93.4 307.7 98.4C295.7 103.4 288 115.1 288 128L288 274.7L118.6 105.4C109.4 96.2 95.7 93.5 83.7 98.5C71.7 103.5 64 115.1 64 128L64 512C64 524.9 71.8 536.6 83.8 541.6z"/></svg>`,
@@ -46,22 +54,26 @@ class NeteaseMiniPlayer {
         this.element = element;
         this.element.neteasePlayer = this;
         this.config = this.parseConfig();
-        this.currentSong = null;
-        this.playlist = [];
-        this.currentIndex = 0;
-        this.audio = new Audio();
-        this.wasPlayingBeforeHidden = false;
-        this.isPlaying = false;
-        this.currentTime = 0;
+        this.globalState = PlayerStateStore.state;
+        this.audio = this.globalState.audio || new Audio();
+        this.globalState.audio = this.audio;
+        this.currentSong = this.globalState.currentSong || null;
+        this.playlist = this.globalState.playlist || [];
+        this.currentIndex = this.globalState.currentIndex ?? 0;
+        this.playMode = this.globalState.playMode || 'list';
+        this.volume = this.globalState.volume ?? 0.2;
+        this.currentTime = this.globalState.currentTime || 0;
+        this.isMinimized = this.globalState.isMinimized ?? true;
+        console.log('Player init - isMinimized from globalState:', this.globalState.isMinimized, 'final isMinimized:', this.isMinimized);
+        this.isPlaying = !this.audio.paused && !!this.audio.src;
         this.duration = 0;
-        this.volume = 0.2;
+        this.wasPlayingBeforeHidden = this.globalState.wasPlayingBeforeHidden || false;
         this.lyrics = [];
         this.currentLyricIndex = -1;
-        this.showLyrics = this.config.lyric;
+        this.showLyrics = this.globalState.showLyrics ?? this.config.lyric;
         this.cache = new Map();
         this.init();
-        this.playMode = 'list';
-        this.shuffleHistory = [];
+        this.shuffleHistory = this.globalState.shuffleHistory || [];
         this.idleTimeout = null;
         this.idleDelay = 5000;
         this.isIdle = false;
@@ -107,24 +119,29 @@ class NeteaseMiniPlayer {
         this.applyResponsiveControls?.();
         this.setupEnvListeners?.();
         this.bindEvents();
+        this.applyMinimizeState();
         this.setupAudioEvents();
         try {
-            if (this.config.embed) {
-                if (this.config.songId) {
-                    await this.loadSingleSong(this.config.songId);
-                } else if (this.config.playlistId) {
-                    await this.loadPlaylist(this.config.playlistId);
-                    this.playlist = [this.playlist[0]];
-                }
+            if (this.globalState.initialized && this.playlist.length > 0) {
+                await this.restorePlayerState();
             } else {
-                if (this.config.playlistId) {
-                    await this.loadPlaylist(this.config.playlistId);
-                } else if (this.config.songId) {
-                    await this.loadSingleSong(this.config.songId);
+                if (this.config.embed) {
+                    if (this.config.songId) {
+                        await this.loadSingleSong(this.config.songId);
+                    } else if (this.config.playlistId) {
+                        await this.loadPlaylist(this.config.playlistId);
+                        this.playlist = [this.playlist[0]];
+                    }
+                } else {
+                    if (this.config.playlistId) {
+                        await this.loadPlaylist(this.config.playlistId);
+                    } else if (this.config.songId) {
+                        await this.loadSingleSong(this.config.songId);
+                    }
                 }
-            }
-            if (this.playlist.length > 0) {
-                await this.loadCurrentSong();
+                if (this.playlist.length > 0) {
+                    await this.loadCurrentSong();
+                }
                 if (this.config.autoplay && !this.config.embed) {
                     this.audio.muted = true;
                     const originalVolume = this.volume;
@@ -177,9 +194,6 @@ class NeteaseMiniPlayer {
                         });
                     }
                 }
-            }
-            if (this.config.defaultMinimized && !this.config.embed && this.config.position !== 'static') {
-                this.toggleMinimize();
             }
         } catch (error) {
             console.error('播放器初始化失败:', error);
@@ -268,7 +282,7 @@ class NeteaseMiniPlayer {
             playlistContainer: this.element.querySelector('.playlist-container'),
             playlistContent: this.element.querySelector('.playlist-content')
         };
-        this.isMinimized = false;
+        this.isMinimized = this.globalState.isMinimized ?? true;
         this.elements.loopModeBtn = this.element.querySelector('.loop-mode-btn');
     }
     bindEvents() {
@@ -516,6 +530,11 @@ class NeteaseMiniPlayer {
         window.addEventListener('resize', reapply);
     }
     setupAudioEvents() {
+        if (this.audio._nmpv2ListenersAdded) {
+            this.audio.volume = this.volume;
+            this.updateVolumeDisplay();
+            return;
+        }
         this.audio.addEventListener('loadedmetadata', () => {
             this.duration = this.audio.duration;
             this.updateTimeDisplay();
@@ -554,6 +573,46 @@ class NeteaseMiniPlayer {
         });
         this.audio.volume = this.volume;
         this.updateVolumeDisplay();
+        this.audio._nmpv2ListenersAdded = true;
+    }
+    saveState() {
+        if (typeof window === 'undefined') return;
+        this.globalState.audio = this.audio;
+        this.globalState.currentSong = this.currentSong;
+        this.globalState.playlist = this.playlist;
+        this.globalState.currentIndex = this.currentIndex;
+        this.globalState.playMode = this.playMode;
+        this.globalState.volume = this.volume;
+        this.globalState.currentTime = this.audio.currentTime;
+        this.globalState.isPlaying = this.isPlaying;
+        this.globalState.isMinimized = this.isMinimized;
+        this.globalState.showLyrics = this.showLyrics;
+        this.globalState.wasPlayingBeforeHidden = this.wasPlayingBeforeHidden;
+        this.globalState.shuffleHistory = this.shuffleHistory;
+        this.globalState.initialized = true;
+        console.log('saveState - saved isMinimized:', this.isMinimized, 'globalState.isMinimized:', this.globalState.isMinimized);
+    }
+    async restorePlayerState() {
+        if (this.currentSong) {
+            this.updateSongInfo(this.currentSong);
+            if (this.currentSong.picUrl) {
+                this.elements.albumCover.src = this.currentSong.picUrl;
+            }
+        }
+        this.updatePlaylistDisplay();
+        this.updateVolumeDisplay();
+        this.applyMinimizeState();
+        this.updateProgress();
+        this.updateTimeDisplay();
+        if (this.audio.src && !this.audio.paused) {
+            this.elements.playIcon.style.display = 'none';
+            this.elements.pauseIcon.style.display = 'inline';
+            this.elements.albumCover.classList.add('playing');
+            this.element.classList.add('player-playing');
+        }
+        if (this.showLyrics && this.currentSong?.id) {
+            await this.loadLyrics(this.currentSong.id);
+        }
     }
     async apiRequest(endpoint, params = {}) {
         const baseUrl = 'https://api.hypcvgm.top/NeteaseMiniPlayer/nmp.php';
@@ -609,6 +668,7 @@ class NeteaseMiniPlayer {
             duration: song.dt
         }));
         this.updatePlaylistDisplay();
+        this.saveState();
     }
     async loadSingleSong(songId) {
         const cacheKey = this.getCacheKey('song', songId);
@@ -643,6 +703,7 @@ class NeteaseMiniPlayer {
             }
         }
         this.playlist = [songData];
+        this.saveState();
     }
     async loadCurrentSong() {
         if (this.playlist.length === 0) return;
@@ -666,6 +727,7 @@ class NeteaseMiniPlayer {
         if (this.showLyrics) {
             await this.loadLyrics(song.id);
         }
+        this.saveState();
     }
     updateSongInfo(song) {
         if (!song) return;
@@ -853,6 +915,7 @@ class NeteaseMiniPlayer {
             this.elements.pauseIcon.style.display = 'inline';
             this.elements.albumCover.classList.add('playing');
             this.element.classList.add('player-playing');
+            this.saveState();
         } catch (error) {
             if (error.name === 'NotAllowedError') {
                 console.warn('自动播放被拦截 (NotAllowedError)');
@@ -870,6 +933,7 @@ class NeteaseMiniPlayer {
         this.elements.pauseIcon.style.display = 'none';
         this.elements.albumCover.classList.remove('playing');
         this.element.classList.remove('player-playing');
+        this.saveState();
     }
     async previousSong() {
         if (this.playlist.length <= 1) return;
@@ -917,6 +981,7 @@ class NeteaseMiniPlayer {
         await this.loadCurrentSong();
         
         this.updatePlaylistDisplay();
+        this.saveState();
         
         if (wasPlaying) {
             setTimeout(async () => {
@@ -1062,6 +1127,7 @@ class NeteaseMiniPlayer {
         const newTime = percent * this.duration;
         if (isFinite(newTime) && newTime >= 0) {
             this.audio.currentTime = newTime;
+            this.saveState();
         }
     }
     setVolume(e) {
@@ -1071,6 +1137,7 @@ class NeteaseMiniPlayer {
         this.volume = percent;
         this.audio.volume = this.volume;
         this.updateVolumeDisplay();
+        this.saveState();
     }
     toggleLyrics() {
         this.showLyrics = !this.showLyrics;
@@ -1108,16 +1175,31 @@ class NeteaseMiniPlayer {
             this.elements.loopModeBtn.title = titles[this.playMode];
         }
     }
+    applyMinimizeState() {
+        if (!this.elements?.minimizeBtn) return;
+        console.log('applyMinimizeState - isMinimized:', this.isMinimized);
+        if (this.isMinimized) {
+            this.element.classList.add('minimized');
+            this.elements.minimizeBtn.classList.add('active');
+            this.elements.minimizeBtn.title = '展开';
+            this.elements.minimizeBtn.innerHTML = ICONS.maximize;
+        } else {
+            this.element.classList.remove('minimized');
+            this.elements.minimizeBtn.classList.remove('active');
+            this.elements.minimizeBtn.title = '缩小';
+            this.elements.minimizeBtn.innerHTML = ICONS.minimize;
+        }
+    }
     toggleMinimize() {
         const isCurrentlyMinimized = this.element.classList.contains('minimized');
-        this.isMinimized = isCurrentlyMinimized;
+        console.log('toggleMinimize - before: isMinimized:', this.isMinimized, 'DOM minimized:', isCurrentlyMinimized);
         if (!isCurrentlyMinimized) {
             this.element.classList.add('minimized');
             this.isMinimized = true;
             if (this.elements.minimizeBtn) {
                 this.elements.minimizeBtn.classList.add('active');
                 this.elements.minimizeBtn.title = '展开';
-                this.elements.minimizeBtn.innerHTML = ICONS.maximize; 
+                this.elements.minimizeBtn.innerHTML = ICONS.maximize;
             }
             this.clearIdleTimer();
             this.isIdle = false;
@@ -1139,6 +1221,8 @@ class NeteaseMiniPlayer {
             }
             this.isIdle = false;
         }
+        console.log('toggleMinimize - after: isMinimized:', this.isMinimized, 'saving state');
+        this.saveState();
     }
     determinePlaylistDirection() {
         const playerRect = this.element.getBoundingClientRect();
@@ -1335,7 +1419,6 @@ if (typeof window !== 'undefined') {
     window.NeteaseMiniPlayer = NeteaseMiniPlayer;
     const ensurePlayerInitialized = () => {
         // Astro 客户端导航时，只有当播放器元素尚未绑定实例时才初始化。
-        // 已经存在的播放器实例会保留当前 Audio 播放状态，不会重新创建。
         const playerElement = document.querySelector('.netease-mini-player');
         if (playerElement && !playerElement._neteasePlayer) {
             NeteaseMiniPlayer.init();
