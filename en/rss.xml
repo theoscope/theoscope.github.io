@@ -2,14 +2,14 @@
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Retypeset</title>
+        <title>檸檬的書店</title>
         <link>https://theoscope.github.io/en/</link>
-        <description>Retypeset is a static blog theme based on the Astro framework. Inspired by Typography, Retypeset establishes a new visual standard and reimagines the layout of all pages, creating a reading experience reminiscent of paper books, reviving the beauty of typography. Details in every sight, elegance in every space.</description>
-        <lastBuildDate>Sat, 02 May 2026 15:33:10 GMT</lastBuildDate>
+        <description></description>
+        <lastBuildDate>Sun, 03 May 2026 06:41:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>en</language>
-        <copyright>Copyright © 2026 radishzz</copyright>
+        <copyright>Copyright © 2026 檸檬</copyright>
         <atom:link href="https://theoscope.github.io/en/rss.xml" rel="self" type="application/rss+xml"/>
     </channel>
 </rss>

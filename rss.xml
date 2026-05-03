@@ -2,14 +2,14 @@
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>重新编排</title>
+        <title>檸檬的書店</title>
         <link>https://theoscope.github.io/</link>
-        <description>Retypeset是一款基于Astro框架的静态博客主题，中文名为重新编排。本主题以活版印字为设计灵感，通过建立全新的视觉规范，对所有页面进行重新编排，打造纸质书页般的阅读体验，再现版式之美。所见皆为细节，方寸尽显优雅。</description>
-        <lastBuildDate>Sat, 02 May 2026 15:33:10 GMT</lastBuildDate>
+        <description></description>
+        <lastBuildDate>Sun, 03 May 2026 06:41:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>zh</language>
-        <copyright>Copyright © 2026 radishzz</copyright>
+        <copyright>Copyright © 2026 檸檬</copyright>
         <atom:link href="https://theoscope.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     </channel>
 </rss>

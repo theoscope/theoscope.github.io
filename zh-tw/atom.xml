@@ -2,15 +2,14 @@
 <?xml-stylesheet href="/feeds/atom-style.xsl" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://theoscope.github.io/zh-tw/</id>
-    <title>重新編排</title>
-    <updated>2026-05-02T15:33:10.554Z</updated>
+    <title>檸檬的書店</title>
+    <updated>2026-05-03T06:41:37.092Z</updated>
     <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
     <author>
-        <name>radishzz</name>
+        <name>檸檬</name>
         <uri>https://theoscope.github.io/</uri>
     </author>
     <link rel="alternate" href="https://theoscope.github.io/zh-tw/"/>
     <link rel="self" href="https://theoscope.github.io/zh-tw/atom.xml"/>
-    <subtitle>Retypeset是一款基於Astro框架的靜態部落格主題，中文名為重新編排。本主題以活版印字為設計靈感，通過建立全新的視覺規範，對所有頁面進行重新編排，打造紙質書頁般的閱讀體驗，再現版式之美。所見皆為細節，方寸盡顯優雅。</subtitle>
-    <rights>Copyright © 2026 radishzz</rights>
+    <rights>Copyright © 2026 檸檬</rights>
 </feed>

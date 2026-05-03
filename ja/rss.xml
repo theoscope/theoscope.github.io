@@ -2,14 +2,14 @@
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>再組版</title>
+        <title>檸檬的書店</title>
         <link>https://theoscope.github.io/ja/</link>
-        <description>Retypesetは、日本語では「再組版」と呼ばれる、Astroフレームワークをベースにした静的ブログテーマです。活版印字からデザインのインスピレーションを得て、新しい視覚的な規範を確立し、すべてのページのレイアウトを再構成することで、紙の書籍のような読書体験を提供し、版面の美しさを蘇らせます。見るものすべてが細部にこだわり、限られたスペースの中に優雅さを表現しています。</description>
-        <lastBuildDate>Sat, 02 May 2026 15:33:10 GMT</lastBuildDate>
+        <description></description>
+        <lastBuildDate>Sun, 03 May 2026 06:41:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>ja</language>
-        <copyright>Copyright © 2026 radishzz</copyright>
+        <copyright>Copyright © 2026 檸檬</copyright>
         <atom:link href="https://theoscope.github.io/ja/rss.xml" rel="self" type="application/rss+xml"/>
     </channel>
 </rss>

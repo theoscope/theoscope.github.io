@@ -2,14 +2,14 @@
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Переверстка</title>
+        <title>檸檬的書店</title>
         <link>https://theoscope.github.io/ru/</link>
-        <description>Retypeset — это статическая тема блога, основанная на фреймворке Astro. Вдохновленная Typography, Retypeset устанавливает новый визуальный стандарт и переосмысливает компоновку всех страниц, создавая опыт чтения, напоминающий печатные книги, возрождая красоту типографики. Детали в каждом взгляде, элегантность в каждом пространстве.</description>
-        <lastBuildDate>Sat, 02 May 2026 15:33:10 GMT</lastBuildDate>
+        <description></description>
+        <lastBuildDate>Sun, 03 May 2026 06:41:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>ru</language>
-        <copyright>Copyright © 2026 radishzz</copyright>
+        <copyright>Copyright © 2026 檸檬</copyright>
         <atom:link href="https://theoscope.github.io/ru/rss.xml" rel="self" type="application/rss+xml"/>
     </channel>
 </rss>
