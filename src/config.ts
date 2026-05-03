@@ -4,13 +4,13 @@ export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
     // site title
-    title: '檸檬的書店',
+    title: '檸檬的樹屋',
     // site subtitle
     subtitle: '屬性雜亂的個人博客',
     // site email
     email: 'Maxmins1231@outlook.com',
     // site description
-    description: '',
+    description: '嗯。。。看起來這裡什麼都有，卻又什麼都沒有',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
     i18nTitle: false, // true | false
     // author name

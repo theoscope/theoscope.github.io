@@ -37,9 +37,9 @@ export const announcements: Announcement[] = [
   },
   {
     id: 'announcement-3',
-    version: 1,
+    version: 2,
     title: '功能上新',
-    content: '上新音乐组件！但是文章界面切换到其他界面后音乐会重新开始，所以可能会有点麻烦，后续我们会优化这个问题的！',
+    content: '上新音乐组件！基于 Netease Mini Player v2，大家可以在左下角看到他哦！不过我做了些许修改，可能与原版不同。',
     confirmText: '我知道了',
     type: 'update',
     createdAt: '2026-05-03',

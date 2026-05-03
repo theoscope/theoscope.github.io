@@ -599,35 +599,3 @@ blockquote {
     padding: .5rem 1rem
 }
 
-.cusdis {
-    --color-bg-main: #1e1e2f !important;      /* 背景更深，不刺眼 */
-    --color-bg-secondary: #2a2a3a !important; /* 二级背景（输入框、卡片等） */
-    --color-text-main: #e4e4e7 !important;    /* 主文字足够亮 */
-    --color-text-light: #a1a1aa !important;   /* 辅助文字（时间、邮箱等） */
-    --color-border: #3f3f4e !important;       /* 边框可见但不突兀 */
-    --color-primary: #8b5cf6 !important;      /* 按钮等主色调稍亮 */
-    --color-primary-light: #a78bfa !important;
-    --color-primary-hover: #7c3aed !important;
-    --color-danger: #f87171 !important;
-    --color-success: #4ade80 !important;
-    --color-warning: #fbbf24 !important;
-}
-
-/* 针对输入框背景优化，防止过暗看不清 */
-.cusdis textarea,
-.cusdis input[type="text"],
-.cusdis input[type="email"] {
-    background-color: #2d2d3a !important;
-    color: #f0f0f0 !important;
-    border-color: #5a5a70 !important;
-}
-
-/* 评论气泡背景（如果有） */
-.cusdis .comment-item {
-    background-color: #2a2a3a !important;
-}
-
-/* 回复按钮等文字颜色 */
-.cusdis button {
-    color: #e4e4e7 !important;
-}
