@@ -2,10 +2,10 @@
 <?xml-stylesheet href="/feeds/rss-style.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>檸檬的書店</title>
+        <title>檸檬的樹屋</title>
         <link>https://theoscope.github.io/ja/</link>
-        <description></description>
-        <lastBuildDate>Sun, 03 May 2026 07:58:42 GMT</lastBuildDate>
+        <description>嗯。。。看起來這裡什麼都有，卻又什麼都沒有</description>
+        <lastBuildDate>Sun, 03 May 2026 15:20:21 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
         <language>ja</language>
