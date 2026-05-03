@@ -1,47 +1,51 @@
 ---
-import type { Language } from '@/i18n/config'
-import Announcement from '@/components/Announcement.astro'
-import Button from '@/components/Button.astro'
-import Footer from '@/components/Footer.astro'
-import Header from '@/components/Header.astro'
-import Navbar from '@/components/Navbar.astro'
-import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
-import GithubCard from '@/components/Widgets/GithubCard.astro'
-import ImageZoom from '@/components/Widgets/ImageZoom.astro'
-import MediaEmbed from '@/components/Widgets/MediaEmbed.astro'
-import SoundEffect from '@/components/Widgets/SoundEffect.astro'
-import { themeConfig } from '@/config'
-import Head from '@/layouts/Head.astro'
-import { getPageInfo } from '@/utils/page'
-import '@/styles/comment.css'
-import '@/styles/extension.css'
-import '@/styles/font.css'
-import '@/styles/global.css'
-import '@/styles/lqip.css'
-import '@/styles/markdown.css'
-import '@/styles/transition.css'
+import type { Language } from "@/i18n/config";
+import Announcement from "@/components/Announcement.astro";
+import Button from "@/components/Button.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Navbar from "@/components/Navbar.astro";
+import CodeCopyButton from "@/components/Widgets/CodeCopyButton.astro";
+import GithubCard from "@/components/Widgets/GithubCard.astro";
+import ImageZoom from "@/components/Widgets/ImageZoom.astro";
+import MediaEmbed from "@/components/Widgets/MediaEmbed.astro";
+import SoundEffect from "@/components/Widgets/SoundEffect.astro";
+import { themeConfig } from "@/config";
+import Head from "@/layouts/Head.astro";
+import { getPageInfo } from "@/utils/page";
+import "@/styles/comment.css";
+import "@/styles/extension.css";
+import "@/styles/font.css";
+import "@/styles/global.css";
+import "@/styles/lqip.css";
+import "@/styles/markdown.css";
+import "@/styles/transition.css";
 
 interface Props {
-  postTitle?: string
-  postDescription?: string
-  postSlug?: string
-  supportedLangs?: Language[]
+  postTitle?: string;
+  postDescription?: string;
+  postSlug?: string;
+  supportedLangs?: Language[];
 }
 
-const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.props
-const { isPost } = getPageInfo(Astro.url.pathname)
-const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
-const MarginBottom = isPost && themeConfig.comment.enabled
-  ? 'mb-10' // Post page with comment
-  : 'mb-12' // Other pages without comment
+const {
+  postTitle,
+  postDescription,
+  postSlug,
+  supportedLangs = [],
+} = Astro.props;
+const { isPost } = getPageInfo(Astro.url.pathname);
+const fontStyle =
+  themeConfig.global.fontStyle === "serif" ? "font-serif" : "font-sans";
+const MarginBottom =
+  isPost && themeConfig.comment.enabled
+    ? "mb-10" // Post page with comment
+    : "mb-12"; // Other pages without comment
 ---
 
 <html
   lang={Astro.currentLocale}
-  class:list={[
-    fontStyle,
-    isPost ? 'scroll-smooth' : '',
-  ]}
+  class:list={[fontStyle, isPost ? "scroll-smooth" : ""]}
 >
   <Head {postTitle} {postDescription} {postSlug} />
   <body>
@@ -64,5 +68,25 @@ const MarginBottom = isPost && themeConfig.comment.enabled
     <GithubCard />
     <MediaEmbed />
     <ImageZoom />
+
+    <!-- 引入 CSS 文件 -->
+    <link rel="stylesheet" href="/player/netease-mini-player-v2.css" />
+
+    <!-- 引入 JS 文件 -->
+    <script src="/player/netease-mini-player-v2.js" defer></script>
+    
+    <!-- 浮动播放器 (推荐) -->
+    <div
+      class="netease-mini-player"
+      transition:persist
+      data-playlist-id="17891550200"
+      data-embed="false"
+      data-position="bottom-left"
+      data-lyric="true"
+      data-theme="auto"
+      data-autoplay="true"
+      data-default-minimized="true"
+    >
+    </div>
   </body>
 </html>
